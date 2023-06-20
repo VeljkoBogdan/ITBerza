@@ -1,37 +1,54 @@
 body {
-    font-family: Helvetica;
+    font-family: Helvetica, sans-serif;
     margin: 0;
 }
 a {
     text-decoration: none;
     color: #000;
 }
-/* style for website header */
-.site-header {
-    border-bottom: 1px solid #ccc;
-    padding: .5em 1em;
-    display: flex;
-    justify-content: space-between;
-}
-.site-identity h1 {
-    font-size: 1.5em;
-    margin: .9em 5em;
-    display: inline-block;
-}
-.site-navigation ul,
-.site-navigation li {
-    margin: 0;
-    padding: 0;
-}
-.site-navigation li {
-    display: inline-block;
-    margin: 1.4em 1em 1em 1em;
-} /*   */
 
-/* style for a vertical line*/
-.vertical {
-    border-left: 6px solid blue;
-    height: 200px;
-    position:absolute;
-    left: 50%;
+header {
+    background-color: black;
+}
+
+.loginForm {
+    margin: 20pt;
+    align-content: center;
+    align-self: center;
+}
+
+#topOfPage {
+    margin-top: 15pt;
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height:auto;}
 }
