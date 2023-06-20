@@ -61,7 +61,7 @@ session_start();
                     <div class="form-group">
                         <label class="control-label" for="password">Your Password: </label>
                         <input class="form-control col-xs-3" type="password" name="password" id="password">
-                    </div><a href=""> Forgotten Password? </a>
+                    </div><a href=""> Forgotten Password? </a><br>
                     <button class="btn btn-default border" type="submit">Submit</button><br>
                 </form>
             </div>
