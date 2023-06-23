@@ -27,7 +27,7 @@ session_start();
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="#"> About</a></li>
                 <li><a href="#">Projects</a></li>
                 <li><a href="#">Contact</a></li>
@@ -51,8 +51,17 @@ session_start();
             <div class="container col-sm-12">
                 <form class="form-horizontal" method="post" action="#" id="loginForm">
                     <div class="form-group">
-                        <label class="control-label" for="name">Your Name: </label>
-                        <input class="form-control col-xs-3" type="text"  name="name" id="name">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="company" id="company-check-box">Nalog u ime kompanije?</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="firstName">Your First Name: </label>
+                        <input class="form-control col-xs-3" type="text"  name="firstName" id="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="lastName">Your Last Name: </label>
+                        <input class="form-control col-xs-3" type="text"  name="lastName" id="lastName">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="email">Your Email Address: </label>
@@ -60,13 +69,40 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="password">Your Password: </label>
-                        <input class="form-control col-xs-3" type="password" name="password" id="password">
-                    </div><a href=""> Forgotten Password? </a><br>
+                        <div class="input-group">
+                            <input class="form-control col-xs-3" type="password" name="password" id="password">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="toggle-button" onclick="togglePasswordVisibility()">
+                                    Show
+                                </button>
+                            </div>
+                        </div>
+                        <a href=""> Forgotten Password? </a>
+                    </div>
+                    <div id="company-input">
+                        <div class="form-group">
+                            <label class="control-label" for="companyName">Company Name: </label>
+                            <input class="form-control col-xs-3" type="text" name="companyName" id="companyName">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="website">Company Website: </label>
+                            <input class="form-control col-xs-3" type="text" name="website" id="website">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="address">Company Address: </label>
+                            <input class="form-control col-xs-3" type="text" name="address" id="address">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="description">Company Description: </label>
+                            <input class="form-control col-xs-3" type="text" name="description" id="description">
+                        </div>
+                    </div>
+                    <br>
                     <button class="btn btn-default border" type="submit">Submit</button><br>
                 </form>
             </div>
-            <h3>Test</h3>
-            <p>Lorem ipsum...</p>
+            <h3></h3>
+            <p></p>
         </div>
         <div class="col-sm-2 sidenav">
             <div class="well">
@@ -80,10 +116,11 @@ session_start();
 </div>
 
 <footer class="container-fluid text-center">
-    <p>Footer Text</p>
+    <p></p>
 </footer>
 
 <!--        SCRIPTS           -->
+<script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
