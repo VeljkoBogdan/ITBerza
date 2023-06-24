@@ -36,7 +36,7 @@ session_start();
                 <li><a href="#">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
             </ul>
         </div>
     </div>

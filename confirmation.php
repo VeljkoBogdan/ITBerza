@@ -70,7 +70,7 @@ if (isset($_POST['signup'])) {
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $email = $_POST['email'];
-    $password =$_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT) ;
     $telephone = $_POST['telephone'];
 
     $user_exist_query = "SELECT * FROM users WHERE email = '$email' ";
@@ -109,7 +109,7 @@ if (isset($_POST['signup'])) {
             }else{
                 echo "
                         <script>
-                            alert('Couldn\'t send mail!');
+                            alert('Couldn\'t send mail! Contact an administrator!');
                             window.location.href='index.php'
                         </script>";
             }
