@@ -49,11 +49,11 @@ window.onload = function() {
 // Form validation function
 function validateForm(type) {
     let isValid = true;
-    if(type === "login"){
+    if(type === 'login'){
         let email = document.getElementById('email').value;
         let password = document.getElementById('password').value;
         //validate
-        if(!validateEmail(email) || email===""){
+        if(validateEmail(email) === false || email===""){
             isValid = false;
         }
         if(password==="" || password.length < 8){
@@ -71,21 +71,27 @@ function validateForm(type) {
         //validate
         if(firstName===""){
             isValid = false;
+            document.getElementById('firstNameError').innerHTML = "Please enter your first name!";
         }
         if(lastName===""){
             isValid = false;
+            document.getElementById('lastNameError').innerHTML = "Please enter your last name!";
         }
-        if(!validateEmail(email) === false || email === ""){
+        if(validateEmail(email) === false || email === ""){
             isValid = false;
+            document.getElementById('emailError').innerHTML = "Please enter a correct email address!";
         }
-        if(!validatePassword(password) === false || password === ""){
+        if(validatePassword(password) === false || password === ""){
             isValid = false;
+            document.getElementById('passwordError').innerHTML = "Password must be 8 characters long and have a number and a special character!";
         }
         if(confirmPassword !== password){
             isValid = false;
+            document.getElementById('confirmPasswordError').innerHTML = "Passwords don't match!";
         }
-        if(!validatePhone(telephone) === false || telephone === ""){
+        if(validatePhone(telephone) === false || telephone === ""){
             isValid = false;
+            document.getElementById('telephoneError').innerHTML = "Please format your telephone number correctly!";
         }
     }
     return isValid;
@@ -124,6 +130,7 @@ function togglePasswordVisibilityLogin(){
         toggleButton.textContent = 'Show';
     }
 }
+// Regex Validators
 function validateEmail(email) {
     let re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email);

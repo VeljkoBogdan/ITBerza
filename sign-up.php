@@ -52,21 +52,25 @@ session_start();
         <div class="col-sm-8 text-left" id="topOfPage">
             <h1 class="text-center">Sign Up</h1>
             <div class="container col-sm-12">
-                <form class="form-horizontal" method="post" action="sign-up-check.php" id="signUpForm" onsubmit="return validateForm('sign-up')">
+                <form class="form-horizontal" method="post" action="confirmation.php" id="signUpForm" onsubmit="return validateForm('signup')">
                     <div class="form-group">
                         <label class="control-label" for="firstName">Your First Name: </label>
+                        <span id="firstNameError"></span>
                         <input class="form-control col-xs-3" type="text" name="firstName" id="firstName">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="lastName">Your Last Name: </label>
+                        <span id="lastNameError"></span>
                         <input class="form-control col-xs-3" type="text" name="lastName" id="lastName">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="email">Your Email Address: </label>
+                        <span id="emailError"></span>
                         <input class="form-control col-xs-3" type="email" name="email" id="email">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="password">Your Password: </label>
+                        <span id="passwordError"></span>
                         <div class="input-group">
                             <input class="form-control col-xs-3" type="password" name="password" id="password">
                             <div class="input-group-btn">
@@ -79,6 +83,7 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="confirm-password">Confirm Password: </label>
+                        <span id="confirmPasswordError"></span>
                         <div class="input-group">
                             <input class="form-control col-xs-3" type="password" name="confirm-password" id="confirm-password">
                             <div class="input-group-btn">
@@ -91,6 +96,7 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="telephone">Your Telephone Number: </label>
+                        <span id="telephoneError"></span>
                         <input class="form-control col-xs-3" type="tel" id="telephone" name="telephone"
                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
                         <small>Example: 123-456-7890</small>
@@ -103,24 +109,28 @@ session_start();
                     <div id="company-input" style="display: none">
                         <div class="form-group">
                             <label class="control-label" for="companyName">Company Name: </label>
+                            <span id="companyNameError"></span>
                             <input class="form-control col-xs-3" type="text" name="companyName" id="companyName">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="website">Company Website: </label>
+                            <span id="companyWebsiteError"></span>
                             <input class="form-control col-xs-3" type="text" name="website" id="website">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="address">Company Address: </label>
+                            <span id="companyAddressError"></span>
                             <input class="form-control col-xs-3" type="text" name="address" id="address">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="description">Company Description: </label>
+                            <span id="companyDescriptionError"></span>
                             <input class="form-control col-xs-3" type="text" name="description" id="description">
                         </div>
                     </div>
                     <br>
                     <div class="form-group">
-                        <input class="btn btn-default border" type="submit" value="Sign up">
+                        <input class="btn btn-default border" name="signup" type="submit" value="Sign up">
                         <!--<button class="btn btn-default border" type="submit">Sign up</button><br>-->
                     </div>
                     <br>

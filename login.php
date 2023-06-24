@@ -49,7 +49,7 @@ session_start();
         <div class="col-sm-8 text-left" id="topOfPage">
             <h1 class="text-center">Welcome back!</h1>
             <div class="container col-sm-12">
-                <form class="form-horizontal" method="post" action="login-check.php" id="loginForm" onsubmit="return validateForm('login')">
+                <form class="form-horizontal" method="post" action="confirmation.php" id="loginForm" onsubmit="return validateForm('login')">
                     <div class="form-group">
                         <label class="control-label" for="email">Your Email Address: </label>
                         <input class="form-control col-xs-3" type="email" name="email" id="email">
@@ -68,7 +68,7 @@ session_start();
                     </div>
                     <br>
                     <div class="form-group">
-                        <button class="btn btn-default border" type="submit">Login</button><br>
+                        <button class="btn btn-default border" name="login" type="submit">Login</button><br>
                     </div>
                 </form>
             </div>
