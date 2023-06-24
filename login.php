@@ -23,14 +23,14 @@ session_start();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" href="index.php">Logo</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="#"> About</a></li>
+                <li><a href="#">Jobs</a></li>
                 <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -49,20 +49,7 @@ session_start();
         <div class="col-sm-8 text-left" id="topOfPage">
             <h1 class="text-center">Welcome back!</h1>
             <div class="container col-sm-12">
-                <form class="form-horizontal" method="post" action="#" id="loginForm">
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="company" id="company-check-box">Nalog u ime kompanije?</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="firstName">Your First Name: </label>
-                        <input class="form-control col-xs-3" type="text"  name="firstName" id="firstName">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="lastName">Your Last Name: </label>
-                        <input class="form-control col-xs-3" type="text"  name="lastName" id="lastName">
-                    </div>
+                <form class="form-horizontal" method="post" action="login-check.php" id="loginForm" onsubmit="return validateForm('login')">
                     <div class="form-group">
                         <label class="control-label" for="email">Your Email Address: </label>
                         <input class="form-control col-xs-3" type="email" name="email" id="email">
@@ -72,37 +59,21 @@ session_start();
                         <div class="input-group">
                             <input class="form-control col-xs-3" type="password" name="password" id="password">
                             <div class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="toggle-button" onclick="togglePasswordVisibility()">
+                                <button class="btn btn-default" type="button" id="toggle-button" onclick="togglePasswordVisibilityLogin()">
                                     Show
                                 </button>
                             </div>
                         </div>
                         <a href=""> Forgotten Password? </a>
                     </div>
-                    <div id="company-input">
-                        <div class="form-group">
-                            <label class="control-label" for="companyName">Company Name: </label>
-                            <input class="form-control col-xs-3" type="text" name="companyName" id="companyName">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="website">Company Website: </label>
-                            <input class="form-control col-xs-3" type="text" name="website" id="website">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="address">Company Address: </label>
-                            <input class="form-control col-xs-3" type="text" name="address" id="address">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="description">Company Description: </label>
-                            <input class="form-control col-xs-3" type="text" name="description" id="description">
-                        </div>
-                    </div>
                     <br>
-                    <button class="btn btn-default border" type="submit">Submit</button><br>
+                    <div class="form-group">
+                        <button class="btn btn-default border" type="submit">Login</button><br>
+                    </div>
                 </form>
             </div>
             <h3></h3>
-            <p></p>
+            <p>Don't have an account? <a href="sign-up.php"> Sign up here! </a></p>
         </div>
         <div class="col-sm-2 sidenav">
             <div class="well">
@@ -115,12 +86,12 @@ session_start();
     </div>
 </div>
 
-<footer class="container-fluid text-center">
-    <p></p>
+<footer class="container-fluid text-center ">
+    <p>&copy; 2023 Your Website. All rights reserved.</p>
 </footer>
 
 <!--        SCRIPTS           -->
-<script src="script.js"></script>
+<script type="text/javascript" src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

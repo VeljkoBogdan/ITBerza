@@ -4,17 +4,11 @@ body {
 }
 a {
     text-decoration: none;
-    color: #000;
+    color: #0000A0;
 }
 
 header {
     background-color: black;
-}
-
-.loginForm {
-    margin: 20pt;
-    align-content: center;
-    align-self: center;
 }
 
 #topOfPage {
@@ -28,7 +22,9 @@ header {
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {height: 450px}
+.row.content {
+    height: 450px;
+}
 
 /* Set gray background color and 100% height */
 .sidenav {
@@ -42,6 +38,12 @@ footer {
     background-color: #555;
     color: white;
     padding: 15px;
+}
+
+footer.container-fluid {
+    display: flex;
+    flex-direction: column;
+    min-height: 30vh;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require "db-config.php";
 ?>
 
 <!DOCTYPE html>
@@ -28,13 +29,20 @@ session_start();
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Projects</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li>
+                    <?php
+                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']==TRUE) {
+                            echo "<a href='logout.php'>".$_SESSION['email']."&nbsp;&nbsp;&nbsp;<span class='glyphicon glyphicon-log-out'></span> Logout</a>";
+                        }else{
+                            echo "<a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a>";
+                        }?>
+                </li>
             </ul>
         </div>
     </div>
@@ -48,6 +56,18 @@ session_start();
             <p><a href="#">Link</a></p>
         </div>
         <div class="col-sm-8 text-left">
+            <div class="text-center">
+                <form class="navbar-form" id="search-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-lg" placeholder="Search" name="search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-search"></i> Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <h1>Welcome</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <hr>
@@ -66,10 +86,11 @@ session_start();
 </div>
 
 <footer class="container-fluid text-center">
-    <p>Footer Text</p>
+    <p>&copy; 2023 Your Website. All rights reserved.</p>
 </footer>
 
 <!--        SCRIPTS           -->
+<script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
