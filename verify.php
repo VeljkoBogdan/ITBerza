@@ -4,7 +4,6 @@ session_start();
 require 'db-config.php';
 
 if (isset($_GET['email']) && isset($_GET['v_cod'])) {
-
     $email = $_GET['email'];
     $v_cod = $_GET['v_cod'];
 
@@ -20,20 +19,22 @@ if (isset($_GET['email']) && isset($_GET['v_cod'])) {
                 $update = "UPDATE users SET verification_status='1' WHERE email = '$fetch_email'";
                 $confirmation = $conn->query($update);
 
-                if ($confirmation===TRUE) {
+                if ($confirmation) {
                     echo "
                         <script>
                             alert('Verification successful');
                             window.location.href='index.php'
                         </script>";
-                }else{
+                }
+                else{
                     echo "
                         <script>
                             alert('Query can not run');
                             window.location.href='index.php' 
                         </script>";
                 }
-            }else{
+            }
+            else{
                 echo "
                         <script>
                             alert('Email already registered');

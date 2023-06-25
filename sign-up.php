@@ -97,8 +97,7 @@ session_start();
                     <div class="form-group">
                         <label class="control-label" for="telephone">Your Telephone Number: </label>
                         <span id="telephoneError"></span>
-                        <input class="form-control col-xs-3" type="tel" id="telephone" name="telephone"
-                               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                        <input class="form-control col-xs-3" type="tel" id="telephone" name="telephone">
                         <small>Example: 123-456-7890</small>
                     </div>
                     <div class="form-group">

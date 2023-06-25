@@ -7,6 +7,7 @@ let loginForm = document.getElementById('loginForm');
 // Signup form
 let signUpForm = document.getElementById('signUpForm');
 
+// Login check script
 loginForm.addEventListener('submit', function(event) {
 
     if (validateForm("login")) {
@@ -96,6 +97,97 @@ function validateForm(type) {
     }
     return isValid;
 }
+function validateJobForm() {
+    let isValid = true;
+    let contactPerson = document.getElementById('contact_name').value;
+    let contactEmail = document.getElementById('contact_email').value;
+    let contactPhone = document.getElementById('contact_phone').value;
+    let companyName = document.getElementById('company_name').value;
+    let taxNumber = document.getElementById('pib').value;
+    let positionName = document.getElementById('position_name').value;
+    let category = document.getElementById('categories').value;
+    let city = document.getElementById('locations').value;
+    let isRemote = false;
+    if(document.getElementById('remoteWork').checked === true){
+        isRemote=true;
+    }
+    let qualifications = document.getElementById('professional_qualification').value;
+    let employmentType = document.getElementById('employment_type').value;
+    let text = document.getElementById('text').value;
+    let signupEmail = document.getElementById('email_input_form').value;
+    let signupPhone = document.getElementById('phone_input_form').value;
+    let duration = document.getElementById('ad_period').value;
+    let signupPeriodFrom = document.getElementById('visible_from').value;
+    let signupPeriodTo = document.getElementById('visible_to').value;
+
+    if(contactPerson==="" || contactPerson.length <= 1){
+        isValid=false;
+        document.getElementById('contact_person_error').innerHTML="Error";
+    }
+    if(contactEmail==="" || validateEmail(contactEmail)===false){
+        isValid=false;
+        document.getElementById('contact_email_error').innerHTML="Error";
+    }
+    if(contactPhone==="" || validatePhone(contactPhone)===false){
+        isValid=false;
+        document.getElementById('contact_phone_error').innerHTML="Error";
+    }
+    if(companyName==="" || companyName.length <= 1){
+        isValid=false;
+        document.getElementById('company_name_error').innerHTML="Error";
+    }
+    if(taxNumber==="" || taxNumber < 10000001 || taxNumber > 99999999 || taxNumber.isNumeric()===false){
+        isValid=false;
+        document.getElementById('pib_error').innerHTML="Error";
+    }
+    if(positionName==="" || positionName===0){
+        isValid=false;
+        document.getElementById('position_error').innerHTML="Error";
+    }
+    if(category==="" || category===0){
+        isValid=false;
+        document.getElementById('category_error').innerHTML="Error";
+    }
+    if(city==="" || city===0){
+        isValid=false;
+        document.getElementById('city_error').innerHTML="Error";
+    }
+    if(qualifications===0 || qualifications===""){
+        isValid=false;
+        document.getElementById('qualification_error').innerHTML="Error";
+    }
+    if(employmentType===0 || employmentType===""){
+        isValid=false;
+        document.getElementById('employment_error').innerHTML="Error";
+    }
+    if(text==="" || text.length < 30){
+        isValid=false;
+        document.getElementById('text_error').innerHTML="Error";
+    }
+    if(signupEmail==="" || validateEmail(signupEmail)===false){
+        isValid=false;
+        document.getElementById('application_email_error').innerHTML="Error";
+    }
+    if(signupPhone==="" || validatePhone(signupPhone)===false){
+        isValid=false;
+        document.getElementById('application_phone_error').innerHTML="Error";
+    }
+    if(duration===""){
+        isValid=false;
+        document.getElementById('duration_error').innerHTML="Error";
+    }
+    if(signupPeriodFrom===""){
+        isValid=false;
+        document.getElementById('period_error').innerHTML="Error";
+    }
+    if(signupPeriodTo===""){
+        isValid=false;
+        document.getElementById('period_error').innerHTML="Error";
+    }
+
+    return isValid;
+}
+
 
 // Login and Signup password visibility toggler
 function togglePasswordVisibilitySignUp(){

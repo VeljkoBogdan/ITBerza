@@ -33,11 +33,15 @@ require "db-config.php";
                 <li><a href="#">About</a></li>
                 <li><a href="#">Projects</a></li>
                 <li><a href="#">Contact</a></li>
+                <?php
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
+                    echo "<li><a href=\"user-page.php\">Profile</a></li>";
+                }?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <?php
-                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']==TRUE) {
+                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
                             echo "<a href='logout.php'>".$_SESSION['email']."&nbsp;&nbsp;&nbsp;<span class='glyphicon glyphicon-log-out'></span> Logout</a>";
                         }else{
                             echo "<a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a>";
