@@ -48,14 +48,14 @@ require "db-config.php";
     </div>
 </nav>
 
-<div class="container-fluid text-center">
+<div class="container-fluid col-sm-12 text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
         </div>
-        <div class="col-sm-8 text-left">
+        <div class="col-sm-8 text-left middle">
             <div class="text-center">
                 <form class="navbar-form" id="search-form">
                     <div class="input-group">

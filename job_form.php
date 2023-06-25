@@ -44,13 +44,13 @@ session_start();
 
 <div class="container-fluid text-center">
     <div class="row content">
-        <div class="sidenav col-sm-2">
+        <div class="sidenav col-sm-2 ">
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
         </div>
 
-        <div class="col-sm-8 text-left">
+        <div class="col-sm-8 text-left middle">
             <div class="container col-sm-12">
                 <form class="form-horizontal" id="jobForm" action="add_job.php" method="POST">
                     <div class="text-center self-center rounded-md">
@@ -75,7 +75,7 @@ session_start();
                             <input type="text" name="contact_email" id="contact_email" value=""
                                    class="form-control col-xs-3 required-field"
                                    placeholder="Kontakt email" maxlength="255" data-error-id="contact_email_error">
-                            <p class="text-red-500 text-xs italic error-message" id="contact_email_error"></p>
+                            <p class="italic error-message" id="contact_email_error"></p>
                         </div>
                     </div>
                     <div class="">
@@ -187,7 +187,7 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap -mx-3">
+                    <div class="">
                         <div class="form-group">
                             <label class="control-label" for="locations">
                                 City:
@@ -431,7 +431,7 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap -mx-3">
+                    <div class="">
                         <div class="form-group">
                             <label class="control-label" for="professional_qualification">
                                 Professional qualifications:
@@ -462,7 +462,7 @@ session_start();
                     </div>
 
 
-                    <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="">
                         <div class="form-group">
                             <label class="control-label" for="text">
                                 Text:
@@ -479,7 +479,7 @@ session_start();
                         </div>
                     </div>
 
-                    <div id="choose_application_type" class="flex md:flex-nowrap flex-col md:flex-row justify-between -mx-3 mt-2">
+                    <div id="choose_application_type" class="">
                         <div class="form-group">
                             <div class="">
                                 <div id="email_input_form" class="mb-8">
@@ -502,7 +502,7 @@ session_start();
                     </div>
 
                     <hr>
-                    <div class=" mt-5 grid md:grid-cols-3">
+                    <div class="">
                         <div id="ad_period" class="form-group">
                             <div class=""><b>Ad duration:</b> <span> (OBAVEZNO) </span></div>
                             <label class="control-label">
@@ -530,7 +530,7 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap -mx-3">
+                    <div class="">
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-default border" type="button" id="submit_btn">

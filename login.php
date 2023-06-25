@@ -46,7 +46,7 @@ session_start();
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
         </div>
-        <div class="col-sm-8 text-left" id="topOfPage">
+        <div class="col-sm-8 text-left middle" id="topOfPage">
             <h1 class="text-center">Welcome back!</h1>
             <div class="container col-sm-12">
                 <form class="form-horizontal" method="post" action="confirmation.php" id="loginForm" onsubmit="return validateForm('login')">

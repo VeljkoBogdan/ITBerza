@@ -1,7 +1,9 @@
-body {
+html, body {
     font-family: Helvetica, sans-serif;
     margin: 0;
+    height: 100%;
 }
+
 a {
     text-decoration: none;
     color: #0000A0;
@@ -15,6 +17,10 @@ header {
     margin-top: 15pt;
 }
 
+.middle {
+    min-height: 375pt;
+}
+
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
     margin-bottom: 0;
@@ -23,7 +29,7 @@ header {
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
-    height: 450px;
+    flex-grow: 1;
 }
 
 /* Set gray background color and 100% height */
@@ -31,6 +37,8 @@ header {
     padding-top: 20px;
     background-color: #f1f1f1;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Set black background color, white text and some padding */
@@ -38,6 +46,19 @@ footer {
     background-color: #555;
     color: white;
     padding: 15px;
+}
+
+.col-container {
+    height: 100%;
+}
+
+.col {
+    height: 100%;
+}
+
+.container-fluid.text-center {
+    display: flex;
+    align-items: stretch;
 }
 
 footer.container-fluid {
