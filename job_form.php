@@ -56,9 +56,7 @@ require 'db-config.php';
                 <?php
                 if(isset($_GET['error'])){
                     if($_GET['error']==2){
-                        echo "<br><div class=\"text-center red\">
-Error, please try again later.
-</div>";
+                        echo "<br><div class=\"text-center red\">Error, please try again later.</div>";
                     }
                 }
                 ?>
@@ -166,8 +164,8 @@ Error, please try again later.
                                 City:
                             </label>
                             <?php
-                            // Query to fetch data from the "categories" table
-                            $query2 = "SELECT id_city, city FROM cities ORDER BY city";
+                            // Query to fetch data from the cities table
+                            $query2 = "SELECT * FROM cities ORDER BY city";
                             $statement2 = $conn->query($query2);
 
                             if ($statement2) {

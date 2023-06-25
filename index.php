@@ -1,5 +1,7 @@
 <?php
 session_start();
+$_SESSION['is_company']=TRUE;
+$_SESSION['is_admin']=TRUE;
 require "db-config.php";
 ?>
 
@@ -60,10 +62,17 @@ require "db-config.php";
             <p><a href="#">Link</a></p>
         </div>
         <div class="col-sm-8 text-left middle">
-            <div class="text-center">
+            <div class="text-center scaled-1-2">
                 <form class="navbar-form" id="search-form">
+                    <?php
+                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE && ((isset($_SESSION['is_company'])  && $_SESSION['is_company'] === TRUE) || (isset($_SESSION['is_admin'])) && $_SESSION['is_admin'] === TRUE)) {
+                        echo '<a href="job_form.php" class="btn btn-success add-job-button">';
+                        echo '<span class="glyphicon glyphicon-plus"></span>';
+                        echo 'Add Job';
+                        echo '</a>';
+                    }?>
                     <div class="input-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="Search" name="search">
+                        <input type="text" class="form-control" placeholder="Search" name="search">
                         <div class="input-group-btn">
                             <button class="btn btn-primary" type="submit">
                                 <i class="bi bi-search"></i> Search
@@ -72,8 +81,40 @@ require "db-config.php";
                     </div>
                 </form>
             </div>
+
+
             <?php
-                $sql = "SELECT id_job, contact_person, contact_email, contact_telephone, company_name, position_name, category, city, remote, qualifications, employment_type, text, signup_email, signup_telephone, duration, signup_period FROM jobs";
+                $sql = "SELECT
+    j.city,
+    ci.city,
+    j.id_job,
+    j.contact_person,
+    j.contact_email,
+    j.contact_telephone,
+    j.company_name,
+    j.position_name,
+    j.category,
+    c.category,
+    j.remote,
+    j.qualifications,
+    q.qualification AS qualification_name,
+    j.employment_type,
+    et.employment_type AS employment_type_name,
+    j.text,
+    j.signup_email,
+    j.signup_telephone,
+    j.duration,
+    j.signup_period
+FROM
+    jobs j
+JOIN categories c ON
+    j.category = c.id_category
+JOIN cities ci ON
+    j.city = ci.id_city
+JOIN employment_type et ON
+    j.employment_type = et.id_employment_type
+JOIN qualifications q ON
+    j.qualifications = q.id_qualification;";
                 $result = $conn->query($sql);
 
                 // Define the number of boxes per page
@@ -102,12 +143,14 @@ require "db-config.php";
                     // Display the job listings as clickable boxes
                     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                         echo '<a href="job_details.php?id='.$row['id_job'].'" class="link-disabled">';
+                            echo '<br>';
                             echo '<div class="card card-rounded">';
                                 echo '<div class="card-header card-rounded">';
-                                    echo '<h5 class="card-title"><div class="">' . $row['position_name'] . '</div></h5>';
+                                    echo '<h3 class="card-title lead">' . $row['position_name'] . '</h3><h4 class="gray"> '.$row['company_name'].'</h4>';
                                 echo '</div>';
                                 echo '<div class="card-body">';
-                                    echo '<p class="card-text">' . $row['company_name'] . '</p>';
+                                    echo '<p class="card-text"><span class="glyphicon glyphicon-globe"></span> ' . strtoupper($row['city'])  . '</p>';
+                                    echo '<p class="card-text"><span class="glyphicon glyphicon-time"></span> ' . $row['signup_period']  . '</p>';
                                 echo '</div>';
                                 echo '<div class="card-footer">';
                                     echo '<div></div>';

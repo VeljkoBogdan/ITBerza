@@ -13,15 +13,12 @@ header {
     background-color: black;
 }
 
-.card-header {
-    background-color: #999999;
-}
-
 .card-rounded {
     min-height: 15pt;
     border-radius: 10px; /* Adjust the value as per your preference */
 }
 .card-header {
+    background-color: #b4b4b4;
     padding-left: 5pt;
     padding-top: 5pt;
     padding-bottom: 1pt;
@@ -34,7 +31,15 @@ header {
 }
 
 .card {
-    background-color: #a3a3a3;
+    background-color: #bebebe;
+}
+
+
+
+.scaled-1-2 {
+    transform: scale(1.2);
+    margin-top: 10pt;
+    margin-bottom: 10pt;
 }
 
 .link-disabled {
@@ -52,6 +57,11 @@ header {
 
 .red {
     color: red;
+}
+
+.gray {
+    margin-top: -15pt;
+    color: #5a5a5a;
 }
 
 #topOfPage {
