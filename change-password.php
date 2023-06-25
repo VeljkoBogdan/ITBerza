@@ -15,7 +15,7 @@ require 'db-config.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet">
-    <script type="text/javascript" src="script.js"></script>
+
 </head>
 <body>
 
@@ -78,7 +78,7 @@ require 'db-config.php';
                                 echo "<div class=\'text-center\'> <span> You need to verify your email first! </span> </div>";
                             }
                             else{
-                                echo "<form class=\"form-horizontal\" method=\"post\" action=\"confirmation.php?email=$email\">
+                                echo "<form class=\"form-horizontal\" id=\"recovery-form\" method=\"post\" action=\"confirmation.php?email=$email\" onsubmit=\"return validatePasswordRecovery()\">
                     <div class=\"text-center\">
                         <h3>Account recovery</h3>
                     </div>
@@ -87,12 +87,14 @@ require 'db-config.php';
                         <span id=\"passwordError\"></span>
                         <div class=\"input-group\">
                             <input class=\"form-control col-xs-3\" type=\"password\" name=\"password\" id=\"password\">
+                            <span class=\"password-error red\" id=\"password-error\"></span>
                             <div class=\"input-group-btn\">
                                 <button class=\"btn btn-default\" type=\"button\" id=\"toggle-button\"
                                         onclick=\"togglePasswordVisibilitySignUp()\">
                                     Show
                                 </button>
                             </div>
+                            
                         </div>
                     </div>
                     <div class=\"form-group\">
@@ -100,17 +102,19 @@ require 'db-config.php';
                         <span id=\"confirmPasswordError\"></span>
                         <div class=\"input-group\">
                             <input class=\"form-control col-xs-3\" type=\"password\" name=\"confirm-password\" id=\"confirm-password\">
+                            <span class=\"password-confirmation-error red\" id=\"password-confirmation-error\"></span>
                             <div class=\"input-group-btn\">
                                 <button class=\"btn btn-default\" type=\"button\" id=\"toggle-button-confirm\"
                                         onclick=\"togglePasswordVisibilitySignUp()\">
                                     Show
                                 </button>
                             </div>
+                            
                         </div>
                     </div>
                     <div class=\"form-group\">
                         <button class=\"btn btn-default border\" type=\"submit\" name=\"request-new-password\" id=\"request-new-password\">
-                            <span>Send email</span>
+                            Set password
                         </button>
                     </div>
                 </form>";
@@ -146,6 +150,7 @@ require 'db-config.php';
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
 

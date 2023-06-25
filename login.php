@@ -65,7 +65,7 @@ require 'db-config.php';
                                 </button>
                             </div>
                         </div>
-                        <a href=""> Forgotten Password? </a>
+                        <a href="change-password-form.php"> Forgotten Password? </a>
                     </div>
                     <br>
                     <div class="form-group">

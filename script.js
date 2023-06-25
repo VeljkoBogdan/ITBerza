@@ -7,6 +7,7 @@ let loginForm = document.getElementById('loginForm');
 // Signup form
 let signUpForm = document.getElementById('signUpForm');
 
+/*
 // Login check script
 loginForm.addEventListener('submit', function(event) {
 
@@ -26,6 +27,7 @@ signUpForm.addEventListener('submit', function(event) {
         event.preventDefault();
     }
 });
+*/
 
 window.onload = function() {
     // Company checkbox
@@ -44,7 +46,6 @@ window.onload = function() {
                 companyInputs.style.display = 'none';
             }
         });
-    // Login check script
 }
 
 // Form validation function
@@ -185,6 +186,31 @@ function validateJobForm() {
         document.getElementById('period_error').innerHTML="Error";
     }
 
+    return isValid;
+}
+function validatePasswordRecovery() {
+    let isValid = true;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirm-password").value;
+
+    if(validatePassword(password) === false){
+        isValid = false;
+        document.getElementById('password-error').innerHTML = "The password must have 8 characters, at least one number, uppercase letter and special character!";
+    }
+    if(confirmPassword !== password){
+        isValid = false;
+        document.getElementById('password-confirmation-error').innerHTML = "Passwords don't match!";
+    }
+    return isValid;
+}
+function validatePasswordRecoveryEmail() {
+    let isValid = true;
+    let forgottenEmail = document.getElementById('forgot-password-email').value.trim();
+
+    if(validateEmail(forgottenEmail) === false){
+        isValid = false;
+    }
+    alert(isValid);
     return isValid;
 }
 

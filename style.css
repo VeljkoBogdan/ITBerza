@@ -13,6 +13,10 @@ header {
     background-color: black;
 }
 
+.red {
+    color: red;
+}
+
 #topOfPage {
     margin-top: 15pt;
 }

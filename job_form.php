@@ -53,6 +53,15 @@ require 'db-config.php';
 
         <div class="col-sm-8 text-left middle">
             <div class="container col-sm-12">
+                <?php
+                if(isset($_GET['error'])){
+                    if($_GET['error']==2){
+                        echo "<br><div class=\"text-center red\">
+Error, please try again later.
+</div>";
+                    }
+                }
+                ?>
                 <form class="form-horizontal" id="jobForm" action="add_job.php" method="POST" onsubmit="return validateJobForm()">
                     <div class="text-center self-center rounded-md">
                         <div class="">

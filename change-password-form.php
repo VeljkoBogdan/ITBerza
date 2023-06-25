@@ -53,7 +53,7 @@ require 'db-config.php';
 
         <div class="col-sm-8 text-left middle">
             <div class="container col-sm-12">
-                <form class="form-horizontal" method="post" action="confirmation.php">
+                <form class="form-horizontal" method="post" id="recovery-email-form" action="confirmation.php" onsubmit="return validatePasswordRecoveryEmail()">
                     <div class="text-center">
                         <h3>Account recovery</h3>
                     </div>

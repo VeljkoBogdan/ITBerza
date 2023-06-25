@@ -42,7 +42,7 @@ require "db-config.php";
                 <li>
                     <?php
                         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
-                            echo "<a href='logout.php'>".$_SESSION['email']."&nbsp;&nbsp;&nbsp;<span class='glyphicon glyphicon-log-out'></span> Logout</a>";
+                            echo "<a href='logout.php'> ".$_SESSION['email']."&nbsp;&nbsp;&nbsp;<span class='glyphicon glyphicon-log-out'></span> Logout</a>";
                         }else{
                             echo "<a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a>";
                         }?>
