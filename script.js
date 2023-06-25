@@ -2,11 +2,6 @@
 const loginPage = "/ITBerza/login.php";
 const signUpPage = "/ITBerza/sign-up.php";
 
-// Login form
-let loginForm = document.getElementById('loginForm');
-// Signup form
-let signUpForm = document.getElementById('signUpForm');
-
 /*
 // Login check script
 loginForm.addEventListener('submit', function(event) {
@@ -63,41 +58,61 @@ function validateForm(type) {
         }
     }
     else{
-        let firstName = document.getElementById('firstName').value;
-        let lastName = document.getElementById('lastName').value;
+        let firstName = document.getElementById('first-name').value;
+        let lastName = document.getElementById('last-name').value;
         let email = document.getElementById('email').value;
         let password = document.getElementById('password').value;
         let confirmPassword = document.getElementById('confirm-password').value;
         let telephone = document.getElementById('telephone').value;
 
+        if(document.getElementById('company-check-box').checked){
+            let companyName = document.getElementById('company-name').value;
+            let website = document.getElementById('website').value;
+            let address = document.getElementById('address').value;
+            let description = document.getElementById('description').value;
+
+            if(companyName===""){
+                isValid = false;
+                document.getElementById('company-name-error').innerHTML = "Enter a company name!";
+            }
+            if(website===""){
+                isValid = false;
+                document.getElementById('company-website-error').innerHTML = "Enter a valid company website!";
+            }
+            if(address===""){
+                isValid = false;
+                document.getElementById('company-address-error').innerHTML = "Enter a company address!";
+            }
+        }
         //validate
         if(firstName===""){
             isValid = false;
-            document.getElementById('firstNameError').innerHTML = "Please enter your first name!";
+            document.getElementById('first-name-error').innerHTML = "Please enter your first name!";
         }
         if(lastName===""){
             isValid = false;
-            document.getElementById('lastNameError').innerHTML = "Please enter your last name!";
+            document.getElementById('last-name-error').innerHTML = "Please enter your last name!";
         }
         if(validateEmail(email) === false || email === ""){
             isValid = false;
-            document.getElementById('emailError').innerHTML = "Please enter a correct email address!";
+            document.getElementById('email-error').innerHTML = "Please enter a correct email address!";
         }
         if(validatePassword(password) === false || password === ""){
             isValid = false;
-            document.getElementById('passwordError').innerHTML = "Password must be 8 characters long and have a number and a special character!";
+            document.getElementById('password-error').innerHTML = "Password must be 8 characters long and have a number and a special character!";
         }
         if(confirmPassword !== password){
             isValid = false;
-            document.getElementById('confirmPasswordError').innerHTML = "Passwords don't match!";
+            document.getElementById('confirm-password-error').innerHTML = "Passwords don't match!";
         }
         if(validatePhone(telephone) === false || telephone === ""){
             isValid = false;
-            document.getElementById('telephoneError').innerHTML = "Please format your telephone number correctly!";
+            document.getElementById('telephone-error').innerHTML = "Please format your telephone number correctly!";
         }
     }
     return isValid;
 }
+// Job form validation function
 function validateJobForm() {
     let isValid = true;
     let contactPerson = document.getElementById('contact_name').value;
@@ -188,6 +203,7 @@ function validateJobForm() {
 
     return isValid;
 }
+// Password recovery form validation function
 function validatePasswordRecovery() {
     let isValid = true;
     let password = document.getElementById("password").value;
@@ -203,6 +219,7 @@ function validatePasswordRecovery() {
     }
     return isValid;
 }
+// Email for recovery validation function
 function validatePasswordRecoveryEmail() {
     let isValid = true;
     let forgottenEmail = document.getElementById('forgot-password-email').value.trim();
@@ -213,7 +230,6 @@ function validatePasswordRecoveryEmail() {
     alert(isValid);
     return isValid;
 }
-
 
 // Login and Signup password visibility toggler
 function togglePasswordVisibilitySignUp(){
@@ -248,6 +264,7 @@ function togglePasswordVisibilityLogin(){
         toggleButton.textContent = 'Show';
     }
 }
+
 // Regex Validators
 function validateEmail(email) {
     let re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;

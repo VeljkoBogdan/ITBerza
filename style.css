@@ -13,6 +13,43 @@ header {
     background-color: black;
 }
 
+.card-header {
+    background-color: #999999;
+}
+
+.card-rounded {
+    min-height: 15pt;
+    border-radius: 10px; /* Adjust the value as per your preference */
+}
+.card-header {
+    padding-left: 5pt;
+    padding-top: 5pt;
+    padding-bottom: 1pt;
+    min-height: 15pt;
+}
+.card-body {
+    padding-left: 5pt;
+    padding-top: 5pt;
+    min-height: 30pt;
+}
+
+.card {
+    background-color: #a3a3a3;
+}
+
+.link-disabled {
+    color: inherit;
+    text-decoration: none !important;
+}
+
+.link-disabled:hover,
+.link-disabled:active,
+.link-disabled:focus {
+    outline: none;
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
 .red {
     color: red;
 }

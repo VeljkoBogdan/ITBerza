@@ -101,60 +101,84 @@ if (isset($_POST['login'])) {
     }
 }
 if (isset($_POST['signup'])) {
+    $firstName = trim($_POST['first-name']);
+    $lastName = trim($_POST['last-name']);
+    $email = trim($_POST['email']);
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT, $options);
+    $telephone = trim($_POST['telephone']);
+    $company = trim($_POST['company-check-box']);
+    $companyName = trim($_POST['company-name']);
+    $website = trim($_POST['website']);
+    $address = trim($_POST['address']);
+    $description = trim($_POST['description']);
 
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT, $options) ;
-    $telephone = $_POST['telephone'];
+    $isCompany = false;
+    $isValid = true;
 
-    $user_exist_query = "SELECT * FROM users WHERE email = '$email' ";
-    $result = $conn->query($user_exist_query);
+    if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($telephone)) {
+        $isValid = false;
+    }
 
-    if ($result) {
-        if ($result->rowCount() > 0) {
-            $row = $result->fetch(PDO::FETCH_ASSOC);
+    if ($company == 'company') {
+        if (empty($companyName) || empty($website) || empty($address)) {
+            $isValid = false;
+        }
+        $isCompany = true;
+    }
 
-            if ($row['email'] === $email) {
-                echo "
+    if ($isValid) {
+        $user_exist_query = "SELECT * FROM users WHERE email = '$email' ";
+        $result = $conn->query($user_exist_query);
+
+        if ($result) {
+            if ($result->rowCount() > 0) {
+                $row = $result->fetch(PDO::FETCH_ASSOC);
+
+                if ($row['email'] === $email) {
+                    echo "
                         <script>
                             alert('Email already taken!');
                             window.location.href='index.php'
                         </script>";
+                }
             }
-        }
-        else{
-            try {
-                $v_cod = bin2hex(random_bytes(16));
-            } catch (\Exception $e) {
-            }
+            else{
+                try {
+                    $v_cod = bin2hex(random_bytes(16));
+                } catch (\Exception $e) {
+                    echo $e->getMessage();
+                }
 
-            $query = "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`, `telephone`, `biography`, `is_banned`, `verification_id`, `verification_status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($query);
-            $insertConfirmation = $stmt->execute([$firstName, $lastName, $email, $password, $telephone, 'null', 0, $v_cod, 0]);
+                $query = "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`, `telephone`, `biography`, `is_banned`, `verification_id`, `verification_status`, `is_company`, `company_name`, `website`, `address`, `description`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $conn->prepare($query);
+                $insertConfirmation = $stmt->execute([$firstName, $lastName, $email, $password, $telephone, 'null', 0, $v_cod, 0, $isCompany, $companyName, $website, $address, $description]);
 
-            $mailConfirmation = sendMail($email,$v_cod);
+                $mailConfirmation = sendMail($email,$v_cod);
 
-            if ($insertConfirmation === TRUE && $mailConfirmation === TRUE) {
-                echo "
+                if ($insertConfirmation === TRUE && $mailConfirmation === TRUE) {
+                    echo "
                         <script>
                             alert('Register successful. Check your email and verify your account.');
                                 window.location.href='index.php'
                         </script>";
-            }else{
-                echo "
+                }else{
+                    echo "
                         <script>
                             alert('Couldn\'t send mail! Contact an administrator!');
                             window.location.href='index.php'
                         </script>";
+                }
             }
-        }
-    }else{
-        echo "
+        }else{
+            echo "
             <script>
                 alert('Couldn\'t retrieve emails!');
                 window.location.href='index.php'
             </script>";
+        }
+    }
+    else {
+        header("Location: sign-up.php");
     }
 }
 if (isset($_POST['forgot-password'])) {

@@ -72,11 +72,82 @@ require "db-config.php";
                     </div>
                 </form>
             </div>
-            <h1>Welcome</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <hr>
-            <h3>Test</h3>
-            <p>Lorem ipsum...</p>
+            <?php
+                $sql = "SELECT id_job, contact_person, contact_email, contact_telephone, company_name, position_name, category, city, remote, qualifications, employment_type, text, signup_email, signup_telephone, duration, signup_period FROM jobs";
+                $result = $conn->query($sql);
+
+                // Define the number of boxes per page
+                $boxesPerPage = 10;
+
+                // Calculate the total number of pages
+                $totalPages = ceil($result->rowCount() / $boxesPerPage);
+
+                // Get the current page number
+                if (isset($_GET['page'])) {
+                $currentPage = intval($_GET['page']);
+                } else {
+                $currentPage = 1;
+                }
+
+                // Calculate the offset for the SQL query
+                $offset = ($currentPage - 1) * $boxesPerPage;
+
+                // Retrieve data for the current page only
+                $sql = $sql . " LIMIT $offset, $boxesPerPage";
+                $result = $conn->query($sql); ?>
+
+            <div class="content">
+                <div class="content">
+                    <?php
+                    // Display the job listings as clickable boxes
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<a href="job_details.php?id='.$row['id_job'].'" class="link-disabled">';
+                            echo '<div class="card card-rounded">';
+                                echo '<div class="card-header card-rounded">';
+                                    echo '<h5 class="card-title"><div class="">' . $row['position_name'] . '</div></h5>';
+                                echo '</div>';
+                                echo '<div class="card-body">';
+                                    echo '<p class="card-text">' . $row['company_name'] . '</p>';
+                                echo '</div>';
+                                echo '<div class="card-footer">';
+                                    echo '<div></div>';
+                                echo '</div>';
+                            echo '</div>';
+                        echo '</a>';
+                    }
+                    ?>
+
+                    <?php
+                    // Display pagination links
+                    if ($totalPages > 1) {
+                        echo '<nav>';
+                        echo '<ul class="pagination justify-content-center">';
+
+                        // Previous page link
+                        if ($currentPage > 1) {
+                            echo '<li class="page-item"><a class="page-link" href="?page=' . ($currentPage - 1) . '">Previous</a></li>';
+                        }
+
+                        // Page links
+                        for ($i = 1; $i <= $totalPages; $i++) {
+                            echo '<li class="page-item';
+                            if ($i === $currentPage) {
+                                echo ' active';
+                            }
+                            echo '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                        }
+
+                        // Next page link
+                        if ($currentPage < $totalPages) {
+                            echo '<li class="page-item"><a class="page-link" href="?page=' . ($currentPage + 1) . '">Next</a></li>';
+                        }
+
+                        echo '</ul>';
+                        echo '</nav>';
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
         <div class="col-sm-2 sidenav">
             <div class="well">

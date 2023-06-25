@@ -10,12 +10,10 @@ require 'db-config.php';
     <title>IT Berza</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet">
-
 </head>
 <body>
 
@@ -87,7 +85,7 @@ require 'db-config.php';
                         <span id=\"passwordError\"></span>
                         <div class=\"input-group\">
                             <input class=\"form-control col-xs-3\" type=\"password\" name=\"password\" id=\"password\">
-                            <span class=\"password-error red\" id=\"password-error\"></span>
+                            
                             <div class=\"input-group-btn\">
                                 <button class=\"btn btn-default\" type=\"button\" id=\"toggle-button\"
                                         onclick=\"togglePasswordVisibilitySignUp()\">
@@ -96,22 +94,24 @@ require 'db-config.php';
                             </div>
                             
                         </div>
+                        <span class=\"password-error red\" id=\"password-error\"></span>
                     </div>
                     <div class=\"form-group\">
                         <label class=\"control-label\" for=\"confirm-password\">Confirm Password: </label>
                         <span id=\"confirmPasswordError\"></span>
                         <div class=\"input-group\">
                             <input class=\"form-control col-xs-3\" type=\"password\" name=\"confirm-password\" id=\"confirm-password\">
-                            <span class=\"password-confirmation-error red\" id=\"password-confirmation-error\"></span>
+                            
                             <div class=\"input-group-btn\">
                                 <button class=\"btn btn-default\" type=\"button\" id=\"toggle-button-confirm\"
                                         onclick=\"togglePasswordVisibilitySignUp()\">
                                     Show
                                 </button>
                             </div>
-                            
                         </div>
+                        <span class=\"password-confirmation-error red\" id=\"password-confirmation-error\"></span>
                     </div>
+                    
                     <div class=\"form-group\">
                         <button class=\"btn btn-default border\" type=\"submit\" name=\"request-new-password\" id=\"request-new-password\">
                             Set password

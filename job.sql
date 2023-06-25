@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2023 at 03:31 PM
+-- Generation Time: Jun 25, 2023 at 08:58 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -443,10 +443,22 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `telephone` varchar(63) NOT NULL,
   `biography` text DEFAULT NULL,
+  `is_company` tinyint(1) DEFAULT 0,
+  `company_name` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
   `is_banned` tinyint(1) NOT NULL DEFAULT 0,
   `verification_id` varchar(255) NOT NULL,
   `verification_status` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id_user`, `first_name`, `last_name`, `email`, `password`, `telephone`, `biography`, `is_company`, `company_name`, `website`, `address`, `description`, `is_banned`, `verification_id`, `verification_status`) VALUES
+(13, 'Veljko', 'Bogdan', 'action@dr.com', '$2y$10$xNasmgwclF3nNpC/Q5Ce2.bC4vQLhLa8UOt9v7LD62.tTDShNtSv6', '065-421-7454', 'null', 0, '', '', '', NULL, 0, '41f1cb135a4d47f52f82d6764883db73', 1);
 
 --
 -- Indexes for dumped tables
@@ -540,7 +552,7 @@ ALTER TABLE `qualifications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
