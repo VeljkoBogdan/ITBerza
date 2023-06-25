@@ -44,7 +44,7 @@ session_start();
 
 <div class="container-fluid text-center">
     <div class="row content">
-        <div class="col-sm-2 sidenav">
+        <div class="sidenav col-sm-2">
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
@@ -555,7 +555,7 @@ session_start();
     </div>
 </div>
 
-<footer class="container-fluid text-center ">
+<footer class="container-fluid text-center">
     <p>&copy; 2023 Your Website. All rights reserved.</p>
 </footer>
 
