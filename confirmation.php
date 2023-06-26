@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db-config.php';
+require 'ban-check.php';
 
 $options = [
     'cost' => 10
@@ -90,6 +91,10 @@ if (isset($_POST['login'])) {
     if ($row && password_verify($password_login, $row['password'])) {
         $_SESSION['logged_in'] = true;
         $_SESSION['email'] = $row['email'];
+        // Check if admin
+        if($row['is_admin']) $_SESSION['is_admin'] = true;
+        // Check if company
+        if($row['is_company']) $_SESSION['is_company'] = true;
         header('location: index.php');
     } else {
         echo "
@@ -270,5 +275,48 @@ if (isset($_POST['change'])) {
             alert('Previous password not correct!');
             window.location.href='user-page.php';
         </script>";
+    }
+}
+if (isset($_POST['admin-ban'])) {
+    if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+        header("Location: index.php");
+    }
+
+    $inputData = $_POST['inputData'];
+
+    $id = "";
+    $email = "";
+
+    if (is_numeric($inputData)) {
+        // Input is a number (ID)
+        $id = (int) $inputData;
+        $query = "SELECT * FROM users WHERE id_user = '$id'";
+    } else {
+        // Input is an email
+        $email = $inputData;
+        $query = "SELECT * FROM users WHERE email = '$email'";
+    }
+
+    $result = $conn->query($query);
+
+    if ($result->rowCount() > 0) {
+        // User exists, toggle the value of the is_banned column
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $isBanned = $row['is_banned'];
+
+        $newBannedStatus = $isBanned ? 0 : 1;
+
+        $updateQuery = "UPDATE users SET is_banned = '$newBannedStatus' WHERE id_user = '$id' OR email = '$email'";
+        $confirm = $conn->query($updateQuery);
+        if ($confirm) {
+            echo "is_banned column updated successfully.";
+            header("Location: admin-board.php?success=1");
+        } else {
+            echo "Error updating is_banned column: ";
+            header("Location: admin-board.php?success=0");
+        }
+    } else {
+        echo "User does not exist.";
+        header("Location: admin-board.php?success=-1");
     }
 }

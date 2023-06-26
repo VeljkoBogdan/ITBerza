@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db-config.php';
+require 'ban-check.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,17 +28,30 @@ require 'db-config.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Logo</a>
+            <a class="navbar-brand" href="index.php">IT Berza</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="index.php">Jobs</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="contact.php">Contact</a> </li>
+                <?php
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
+                    echo "<li><a href=\"user-page.php\">Profile</a></li>";
+                    if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']===TRUE) {
+                        echo "<li><a href=\"admin-board.php\">Admin Board</a></li>";
+                    }
+                }?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
+                <li>
+                    <?php
+                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
+                        echo "<a href='logout.php'> ".$_SESSION['email']."&nbsp;&nbsp;&nbsp;<span class='glyphicon glyphicon-log-out'></span> Logout</a>";
+                    }else{
+                        echo "<a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a>";
+                    }?>
+                </li>
             </ul>
         </div>
     </div>
@@ -60,7 +74,7 @@ require 'db-config.php';
                     }
                 }
                 ?>
-                <form class="form-horizontal" id="jobForm" action="add_job.php" method="POST" onsubmit="return validateJobForm()">
+                <form class="form-horizontal" id="jobForm" action="add-job.php" method="POST" onsubmit="return validateJobForm()">
                     <div class="text-center self-center rounded-md">
                         <div class="">
                             <h3>Employer Information</h3>
@@ -96,7 +110,7 @@ require 'db-config.php';
                         </div> <!-- Contact Telephone -->
                         <div class="form-group">
                             <label class="control-label" for="company_name">
-                                Company Name:<span> (IMPORTANT) </span>
+                                Company Name:
                             </label>
                             <input type="text" name="company_name" id="company_name" value="" class="form-control col-xs-3" placeholder="Company Name" maxlength="255" data-error-id="company_name_error">
                             <p class="italic error-message" id="company_name_error"></p>
@@ -105,9 +119,9 @@ require 'db-config.php';
                     <div class="">
                         <div class="form-group">
                             <label class="control-label" for="pib">
-                                Tax Identification Number: <span> (IMPORTANT) </span>
+                                Tax Identification Number:
                             </label>
-                            <input type="text" name="pib" id="pib" value="" class="form-control col-xs-3" placeholder="Poreski identifikacioni broj">
+                            <input type="text" name="pib" id="pib" value="" class="form-control col-xs-3" placeholder="Tax Identification Number">
                             <p class="italic error-message" id="pib_error"></p>
                         </div> <!-- TIN -->
                     </div>
@@ -119,11 +133,11 @@ require 'db-config.php';
                     </div>
 
                     <div class="">
-                        <div class="form-group">
+                        <div class="form-group lead">
                             <label class="control-label" for="position_name">
-                                Position Name: <span> (IMPORTANT) </span>
+                                Position Name:
                             </label>
-                            <input type="text" name="position_name" id="position_name" value="" class="form-control col-xs-3" placeholder="Naziv radne pozicije" maxlength="255" data-error-id="position_name_error">
+                            <input type="text" name="position_name" id="position_name" value="" class="form-control col-xs-3" placeholder="Position Name" maxlength="255" data-error-id="position_name_error">
                             <p class="italic error-message" id="position_error"></p>
                         </div> <!-- Position Name -->
                         <div class="form-group">
@@ -242,7 +256,7 @@ require 'db-config.php';
                         </div> <!-- Qualifications -->
                         <div class="form-group">
                             <label class="control-label" for="employment_type">
-                                Employment Type: <span> (OBAVEZNO) </span>
+                                Employment Type:
                             </label>
                             <?php
                             // Query to fetch data from the "categories" table
@@ -313,24 +327,26 @@ require 'db-config.php';
                     <hr>
                     <div class="">
                         <div id="ad_period" class="form-group">
-                            <div class=""><b>Ad duration:</b> <span> (OBAVEZNO) </span></div>
+                            <div class=""><b>Ad duration:</b></div>
                             <label class="control-label">
                                 <input type="radio" class="form-radio" name="ad_period" value="15">
-                                <span class="ml-2">15 dana</span>
+                                <span class="ml-2">15 days</span>
                             </label>
                             <label class="control-label">
                                 <input type="radio" class="form-radio" name="ad_period" value="30">
-                                <span class="ml-2">30 dana</span>
+                                <span class="ml-2">30 days</span>
                             </label>
                             <p class="italic error-message" id="duration_error"></p>
                         </div> <!-- Duration -->
                         <div class="form-group">
                             <label class="control-label" for="visible_from">
-                                Signup Period: <span> (OBAVEZNO) </span>
+                                Signup Period:
                             </label>
                             <div class="sm:columns-2">
-                                <input type="text" id="visible_from" name="visible_from" value="" class="date" placeholder="Od">
-                                <input type="text" id="visible_to" name="visible_to" value="" class="date" placeholder="Do">
+                                <label class="control-label" for="visible_from">Visible from:</label>
+                                <input type="date" id="visible_from" name="visible_from" value="" class="date" placeholder="From">
+                                <label class="control-label" for="visible_to"> to:</label>
+                                <input type="date" id="visible_to" name="visible_to" value="" class="date" placeholder="To">
                             </div>
                             <p class="italic error-message" id="period_error"></p>
                         </div> <!-- Signup Period -->

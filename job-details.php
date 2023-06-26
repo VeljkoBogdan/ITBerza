@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db-config.php';
+require "db-config.php";
 require 'ban-check.php';
 ?>
 
@@ -11,12 +11,10 @@ require 'ban-check.php';
     <title>IT Berza</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet">
-    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 
@@ -66,33 +64,84 @@ require 'ban-check.php';
     </div>
 </nav>
 
-<div class="container-fluid text-center">
+<div class="container-fluid col-sm-12 text-center">
     <div class="row content">
-        <div class="sidenav col-sm-2 ">
+        <div class="col-sm-2 sidenav">
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
         </div>
-
         <div class="col-sm-8 text-left middle">
-            <div class="container col-sm-12">
-                <form class="form-horizontal" method="post" id="recovery-email-form" action="confirmation.php" onsubmit="return validatePasswordRecoveryEmail()">
-                    <div class="text-center">
-                        <h3>Account recovery</h3>
+            <div class="text-center scaled-1-2">
+
+            </div>
+            <div class="content"><br>
+                <div class="card card-rounded">
+                    <div class="card-header card-rounded">
+                        <h3 class="text-left">
+                            <?php
+                            $id = $_GET['id'];
+                            $dateTo = "";
+
+                            include_once 'job-details-sql.php';
+
+                            if ($result) {
+                                $row = $result->fetch(PDO::FETCH_ASSOC);
+                                echo $row['position_name'];
+                                $dateTo = date('Y F d', strtotime($row['period_to']));
+                            }
+                            ?>
+                        </h3>
+                        <div>
+                            <h4 class="white"> <?php echo $row['company_name']; ?> </h4>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label" for="forgot-password-email">Enter your email: </label>
-                        <input type="email" class="form-control" id="forgot-password-email" name="forgot-password-email">
+                    <div class="card-body card-rounded">
+                        <hr>
+                        <h3 class="text-center">Job Information</h3>
+                        <div>
+                            <?php echo '<span class="glyphicon glyphicon-map-marker"></span> '. strtoupper($row['city']) ; ?>
+                        </div>
+                        <div>
+                            <?php echo 'Registration Deadline: <b><span class="glyphicon glyphicon-time"></span> '.$dateTo.'</b><br><br>'; ?>
+                        </div>
+                        <div>
+                            <?php echo '<span class="glyphicon glyphicon-map-marker"></span> '. $row['employment_type_name'] ; ?>
+                        </div>
+                        <div>
+                            <?php echo '<span class="glyphicon glyphicon-map-marker"></span> '. $row['qualification_name'] ; ?>
+                        </div>
+                        <div>
+                            <?php echo $row['remote']? "REMOTE": "NOT REMOTE" ; ?>
+                        </div>
+                        <div class="content card">
+                            <hr>
+                            <div class="card-body"><?php echo $row['text'] ; ?></div>
+                            <hr>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-default border" type="submit" name="forgot-password" id="forgot-password-button">
-                            <span>Send email</span>
-                        </button>
+                    <div class="card-footer card-rounded">
+                        <?php
+                        if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true){
+                            echo '<div class="text-center">
+                                    <a href="#">Contact Company</a>
+                                </div><br>';
+                            if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']===true){
+                                echo '<div class="text-center">
+                                        <a href="validate-job.php?id='.$id.' "><button><h4>VALIDATE AD</h4></button></a>
+                                        </div>';
+                            }
+                        }
+                        ?>
                     </div>
-                </form>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <div class="content">
+
             </div>
         </div>
-
         <div class="col-sm-2 sidenav">
             <div class="well">
                 <p>ADS</p>
@@ -109,6 +158,7 @@ require 'ban-check.php';
 </footer>
 
 <!--        SCRIPTS           -->
+<script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

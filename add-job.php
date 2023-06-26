@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db-config.php';
+require 'ban-check.php';
 
 // Function to validate and trim the data
 function validateAndTrimData($data) {
@@ -53,23 +54,23 @@ if (
     $signupPeriodTo === null
 ) {
     // Handle validation error, e.g., redirect back with an error message
-    header('Location: job_form.php?error=1');
+    header('Location: job-form.php?error=1');
     exit;
 }
 
 $query = "INSERT INTO `jobs`(`contact_person`, `contact_email`, `contact_telephone`, `company_name`, `poster_company_name`,
                    `tax_id_number`,`position_name`, `category`, `city`,`remote`, `qualifications`, `employment_type`,
-                   `text`, `signup_email`, `signup_telephone`, `duration`, `signup_period`)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                   `text`, `signup_email`, `signup_telephone`, `duration`, `period_from`, `period_to`)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $stmt = $conn->prepare($query);
 $insertConfirmation = $stmt->execute([$contactPerson, $contactEmail, $telephone, $companyName, $companyName, $tin, $position,
-    $category, $city, $remote, $qualifications, $employmentType, $text, $signupEmail, $signupPhone, $duration, $signupPeriodFrom." - ".$signupPeriodTo]);
+    $category, $city, $remote, $qualifications, $employmentType, $text, $signupEmail, $signupPhone, $duration, $signupPeriodFrom, $signupPeriodTo]);
 
 if($insertConfirmation===true){
     header('Location: index.php');
     exit;
 }
 else{
-    header('Location: job_form.php?error=2');
+    header('Location: job-form.php?error=2');
     exit;
 }

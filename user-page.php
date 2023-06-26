@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db-config.php';
+require 'ban-check.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,20 +28,35 @@ require 'db-config.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Logo</a>
+            <a class="navbar-brand" href="index.php">IT Berza</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="index.php">Jobs</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="contact.php">Contact</a> </li>
+                <?php
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
+                    echo "<li><a href=\"user-page.php\">Profile</a></li>";
+                    if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']===TRUE) {
+                        echo "<li><a href=\"admin-board.php\">Admin Board</a></li>";
+                    }
+                }?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <?php
+                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE && ((isset($_SESSION['is_company'])  && $_SESSION['is_company'] === TRUE) || (isset($_SESSION['is_admin'])) && $_SESSION['is_admin'] === TRUE)) {
+                        echo '<li>';
+                        echo '<a href="job-form.php" class="btn add-job-button">';
+                        echo '<span class="glyphicon glyphicon-plus"></span>';
+                        echo 'Add Job';
+                        echo '</a>';
+                        echo '</li>';
+                    }?>
                 <li>
                     <?php
                     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
-                        echo "<a href='logout.php'>".$_SESSION['email']."&nbsp;&nbsp;&nbsp;<span class='glyphicon glyphicon-log-out'></span> Logout</a>";
+                        echo "<a href='logout.php'> ".$_SESSION['email']."&nbsp;&nbsp;&nbsp;<span class='glyphicon glyphicon-log-out'></span> Logout</a>";
                     }else{
                         echo "<a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a>";
                     }?>
@@ -60,6 +76,20 @@ require 'db-config.php';
 
         <div class="col-sm-8 text-left middle">
             <div class="container col-sm-12">
+                <div class="text-center self-center rounded-md">
+                    <div class="">
+                        <h3>User Info</h3>
+                    </div>
+                </div>
+                <div>
+                    <?php include_once 'user-page-list-data.php' // List data ?>
+                </div>
+                <hr>
+                <div class="text-center self-center rounded-md">
+                    <div class="">
+                        <h3>Change Password</h3>
+                    </div>
+                </div>
                 <form class="form-horizontal" id="change-data-form" name="change-data-form" action="confirmation.php" method="post" onsubmit="return validatePasswordChange()">
                     <div class="form-group">
                         <label class="control-label" for="password">Your previous password:</label>

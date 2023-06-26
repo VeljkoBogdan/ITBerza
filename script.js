@@ -24,6 +24,7 @@ signUpForm.addEventListener('submit', function(event) {
 });
 */
 
+
 window.onload = function() {
     // Extract the base page name from the URL
     let urlParts = window.location.pathname.split('/');
@@ -257,6 +258,26 @@ function validatePasswordChange() {
     }
     return isValid;
 }
+// Validate Email and ID from Admin Ban form
+function validateAdminForm() {
+    var inputData = document.getElementById('inputData').value;
+
+    if (isNaN(inputData)) {
+        // Input is an email
+        if (!validateEmail(inputData)) {
+            alert('Invalid email address.');
+            return false;
+        }
+    }
+    else {
+        // Input is a number (ID)
+        if (!isValidID(inputData)) {
+            alert('Invalid ID.');
+            return false;
+        }
+    }
+    return true;
+}
 
 // Login and Signup password visibility toggler
 function togglePasswordVisibilitySignUp(){
@@ -324,3 +345,11 @@ function validatePhone(phone){
     let re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     return re.test(phone);
 }
+// ID validation
+function isValidID(id) {
+    // ID validation logic here
+    // You can perform additional checks if needed
+    return !isNaN(id) && id > 0;
+}
+
+

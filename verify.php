@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require 'db-config.php';
 
 if (isset($_GET['email']) && isset($_GET['v_cod'])) {

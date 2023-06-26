@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db-config.php';
+require "db-config.php";
 require 'ban-check.php';
 ?>
 
@@ -11,12 +11,10 @@ require 'ban-check.php';
     <title>IT Berza</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet">
-    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 
@@ -68,31 +66,18 @@ require 'ban-check.php';
 
 <div class="container-fluid text-center">
     <div class="row content">
-        <div class="sidenav col-sm-2 ">
+        <div class="col-sm-2 sidenav">
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
             <p><a href="#">Link</a></p>
         </div>
-
-        <div class="col-sm-8 text-left middle">
+        <div class="col-sm-8 text-left middle" id="topOfPage">
+            <h1 class="text-center">About</h1>
             <div class="container col-sm-12">
-                <form class="form-horizontal" method="post" id="recovery-email-form" action="confirmation.php" onsubmit="return validatePasswordRecoveryEmail()">
-                    <div class="text-center">
-                        <h3>Account recovery</h3>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="forgot-password-email">Enter your email: </label>
-                        <input type="email" class="form-control" id="forgot-password-email" name="forgot-password-email">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-default border" type="submit" name="forgot-password" id="forgot-password-button">
-                            <span>Send email</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
 
+            </div>
+
+        </div>
         <div class="col-sm-2 sidenav">
             <div class="well">
                 <p>ADS</p>
@@ -104,13 +89,15 @@ require 'ban-check.php';
     </div>
 </div>
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center ">
     <p>&copy; 2023 Your Website. All rights reserved.</p>
 </footer>
 
 <!--        SCRIPTS           -->
+<script type="text/javascript" src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

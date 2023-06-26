@@ -4,9 +4,20 @@ html, body {
     height: 100%;
 }
 
+body {
+    background: #d9d9d9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #d9d9d9, #b4c1d3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #d9d9d9, #b4c1d3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin:0;
+}
+
 a {
     text-decoration: none;
     color: #0000A0;
+}
+
+hr {
+    border-color: #ffffff;
 }
 
 header {
@@ -19,7 +30,11 @@ header {
     border-radius: 10px; /* Adjust the value as per your preference */
 }
 .card-header {
-    background-color: #b4b4b4;
+    background: #e8e8e8;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #c8cce7, #6f7de8);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #c8cce7, #6f7de8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin:0;
+    height:100%;
     padding-left: 5pt;
     padding-top: 5pt;
     padding-bottom: 1pt;
@@ -31,8 +46,18 @@ header {
     min-height: 30pt;
 }
 
+.card-header-expired {
+    background: #bebebe !important;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #bebebe, #817474) !important;  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #bebebe, #817474) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.card-body-expired {
+    background: #bebebe !important;  /* fallback for old browsers */
+}
+
 .card {
-    background-color: #bebebe;
+    background-color: #e8e8e8;
 }
 /*endregion*/
 
@@ -57,8 +82,13 @@ header {
 }
 
 .gray {
-    margin-top: -15pt;
+    margin-top: -5pt;
     color: #5a5a5a;
+}
+
+.white {
+    margin-top: -5pt;
+    color: #e8e8e8;
 }
 /*endregion*/
 
@@ -110,6 +140,7 @@ footer {
     height: 100%;
 }
 
+/*region Footer*/
 .container-fluid.text-center {
     display: flex;
     align-items: stretch;
@@ -120,6 +151,7 @@ footer.container-fluid {
     flex-direction: column;
     min-height: 30vh;
 }
+/*endregion Footer*/
 
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {

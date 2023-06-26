@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2023 at 08:58 PM
+-- Generation Time: Jun 26, 2023 at 04:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -394,7 +394,8 @@ CREATE TABLE `jobs` (
   `signup_email` varchar(255) NOT NULL,
   `signup_telephone` varchar(255) NOT NULL,
   `duration` int(63) NOT NULL,
-  `signup_period` varchar(255) NOT NULL,
+  `period_from` date DEFAULT NULL,
+  `period_to` date DEFAULT NULL,
   `is_enabled` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -402,8 +403,8 @@ CREATE TABLE `jobs` (
 -- Dumping data for table `jobs`
 --
 
-INSERT INTO `jobs` (`id_job`, `contact_person`, `contact_email`, `contact_telephone`, `company_name`, `poster_company_name`, `tax_id_number`, `position_name`, `category`, `city`, `remote`, `qualifications`, `employment_type`, `text`, `signup_email`, `signup_telephone`, `duration`, `signup_period`, `is_enabled`) VALUES
-(1, 'Veljko Bogdan', 'action@dr.com', '065-421-7454', 'Web', 'Web', 10000002, 'Web', '1', '2', 1, '1', '1', 'document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\";', 'action@dr.com', '065-421-7454', 30, '123 - 123', 0);
+INSERT INTO `jobs` (`id_job`, `contact_person`, `contact_email`, `contact_telephone`, `company_name`, `poster_company_name`, `tax_id_number`, `position_name`, `category`, `city`, `remote`, `qualifications`, `employment_type`, `text`, `signup_email`, `signup_telephone`, `duration`, `period_from`, `period_to`, `is_enabled`) VALUES
+(1, 'Veljko Bogdan', 'action@dr.com', '065-421-7454', 'Web', 'Web', 10000002, 'Web', '1', '90', 1, '1', '1', 'document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\";', 'action@dr.com', '065-421-7454', 30, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -450,15 +451,18 @@ CREATE TABLE `users` (
   `description` text DEFAULT NULL,
   `is_banned` tinyint(1) NOT NULL DEFAULT 0,
   `verification_id` varchar(255) NOT NULL,
-  `verification_status` int(3) NOT NULL
+  `verification_status` int(3) NOT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_user`, `first_name`, `last_name`, `email`, `password`, `telephone`, `biography`, `is_company`, `company_name`, `website`, `address`, `description`, `is_banned`, `verification_id`, `verification_status`) VALUES
-(13, 'Veljko', 'Bogdan', 'action@dr.com', '$2y$10$xNasmgwclF3nNpC/Q5Ce2.bC4vQLhLa8UOt9v7LD62.tTDShNtSv6', '065-421-7454', 'null', 0, '', '', '', NULL, 0, '41f1cb135a4d47f52f82d6764883db73', 1);
+INSERT INTO `users` (`id_user`, `first_name`, `last_name`, `email`, `password`, `telephone`, `biography`, `is_company`, `company_name`, `website`, `address`, `description`, `is_banned`, `verification_id`, `verification_status`, `is_admin`) VALUES
+(13, 'Veljko', 'Bogdan', 'action@dr.com', '$2y$10$xNasmgwclF3nNpC/Q5Ce2.bC4vQLhLa8UOt9v7LD62.tTDShNtSv6', '065-421-7454', 'null', 0, '', '', '', NULL, 0, '41f1cb135a4d47f52f82d6764883db73', 1, 0),
+(14, 'Veljko', 'Bogdan', 'vtsveljkobogdan@gmail.com', '$2y$10$XJ8EBzNDzyuYhRkuIBE0fO4AgxPEdjMPHqAIBt65gqcOutHoZ8moG', '0654217454', 'I am admin!', 0, 'Web', 'Web', 'Web', 'Web', 0, '6e6eebf3430ac0c867ed113cb1c1f3e8', 1, 1),
+(15, 'Veljko', 'Bogdan', 'johny.t@comic.com', 'Giornogiovanna355!', '0654217454', 'null', 1, 'Web', 'Web', 'Osmi Mart 9', 'Web', 0, 'eaed62c737d1ed70371439a1141bcfec', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -552,7 +556,7 @@ ALTER TABLE `qualifications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
