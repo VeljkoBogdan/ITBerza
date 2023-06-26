@@ -72,7 +72,6 @@ require 'ban-check.php';
             <p><a href="#">Link</a></p>
         </div>
         <div class="col-sm-8 text-left middle"><br>
-            <div class="content">
                 <script>
                     $(document).ready(function() {
                         $('#toggleFormBtn').click(function() {
@@ -80,8 +79,8 @@ require 'ban-check.php';
                         });
                     });</script>
                 <button class="btn btn-primary border" id="toggleFormBtn"> Filter </button>
-                <form style="display: none;" id="searchForm" class="form-vertical" method="GET" action="index.php">
-                    <div class="form-group">
+                <form style="display: none;" id="searchForm" class="form-horizontal" method="GET" action="index.php">
+                    <div class="form-group container-fluid">
                         <label class="control-label" for="categories">Category:</label>
                         <?php
                     // Query to fetch data from the "categories" table
@@ -108,7 +107,7 @@ require 'ban-check.php';
                     }
                     ?>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group container-fluid">
                         <label class="control-label" for="locations">Location:</label>
                         <?php
                     // Query to fetch data from the cities table
@@ -135,7 +134,7 @@ require 'ban-check.php';
                     }
                     ?>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group container-fluid">
                         <label class="control-label" for="professional_qualification">Professional Qualification:</label>
                         <?php
                     // Query to fetch data from the "qualifications" table
@@ -149,11 +148,12 @@ require 'ban-check.php';
 
                         // Fetch the query results
                         while ($row = $statement3->fetch(PDO::FETCH_ASSOC)) {
-                            $id3 = $row['id_qualification'];
-                            $qualification = $row['qualification'];
-                            echo '<option value="' . $id3 . '">' . $qualification . '</option>';
+                            if($row['id_qualification'] != 1) {
+                                $id3 = $row['id_qualification'];
+                                $qualification = $row['qualification'];
+                                echo '<option value="' . $id3 . '">' . $qualification . '</option>';
+                            }
                         }
-
                         echo '</select>';
                     } else {
                         // Handle query error
@@ -162,7 +162,7 @@ require 'ban-check.php';
                     }
                     ?>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group container-fluid">
                     <label class="control-label" for="employment_type">Employment Type:</label>
                     <?php
                     // Query to fetch data from the "employment_type" table
@@ -176,9 +176,11 @@ require 'ban-check.php';
 
                         // Fetch the query results
                         while ($row = $statement4->fetch(PDO::FETCH_ASSOC)) {
-                            $id4 = $row['id_employment_type'];
-                            $employment = $row['employment_type'];
-                            echo '<option value="' . $id4 . '">' . $employment . '</option>';
+                            if($row['id_employment_type']!=1){
+                                $id4 = $row['id_employment_type'];
+                                $employment = $row['employment_type'];
+                                echo '<option value="' . $id4 . '">' . $employment . '</option>';
+                            }
                         }
 
                         echo '</select>';
@@ -188,10 +190,9 @@ require 'ban-check.php';
                         echo "Error: " . $errorInfo[2];
                     }
                     ?>
-                    </div><br><br>
+                    </div><br>
                     <button class="btn btn-default border" type="submit" name="search">Search</button>
                 </form>
-            </div>
             <div class="content">
                 <hr>
                 <h3 class="text-center">Jobs</h3>

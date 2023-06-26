@@ -76,7 +76,8 @@ $sql = "SELECT
     j.signup_telephone,
     j.duration,
     j.period_from,
-    j.period_to
+    j.period_to,
+    j.is_enabled
 FROM
     jobs j
 JOIN categories c ON
@@ -101,7 +102,7 @@ $totalPages = ceil($totalRows / $boxesPerPage);
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     // Convert from yyyy/mm/dd to yyyy - month name - dd
     $dateFrom = date('Y-F-d', strtotime($row['period_from']));
-    $dateTo = date('F d', strtotime($row['period_to']));
+    $dateTo = date('Y F d', strtotime($row['period_to']));
 
     echo '<a href="job-details.php?id=' . $row['id_job'] . '" class="link-disabled">';
     echo '<br>';
@@ -122,6 +123,11 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     echo '"><span class="glyphicon glyphicon-time"></span> ' . $dateTo . '</p>';
     echo '</div>';
     echo '<div class="card-footer">';
+    if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']===true && $row['is_enabled']==0){
+        echo '<div class="text-center">
+                                        <a class="btn btn-success border" href="validate-job.php?id='.$row['id_job'].' "><x button><h4>VALIDATE AD</h4></xbutton></a>
+                                        </div><br>';
+    }
     echo '<div></div>';
     echo '</div>';
     echo '</div>';
