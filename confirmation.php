@@ -78,7 +78,6 @@ function passwordChange($email, $v_cod){
 }
 
 if (isset($_POST['login'])) {
-
     $email_username = $_POST['email'];
     $password_login = $_POST['password'];
 
@@ -235,4 +234,41 @@ if (isset($_POST['request-new-password'])) {
     $_SESSION['logged_in'] = true;
     $_SESSION['email'] = $email_username;
     header('location: index.php');
+}
+if (isset($_POST['change'])) {
+    $email = $_SESSION['email'];
+    $password = $_POST['password'];
+    $newPassword = password_hash($_POST['new-password'], PASSWORD_BCRYPT, $options);
+    $confirmPassword = $_POST['confirm-password'];
+
+    $sql = "SELECT * FROM users WHERE email = :email AND verification_status = '1'";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row && password_verify($password, $row['password'])) {
+        $change = "UPDATE users SET password='$password' WHERE email = '$email'";
+        $confirmation = $conn->query($change);
+        if($confirmation){
+            echo "
+        <script>
+            alert('Your password has been successfully changed!');
+            window.location.href='user-page.php?success=1';
+        </script>";
+        }
+        else{
+            echo "
+        <script>
+            alert('There has been a database error!');
+            window.location.href='user-page.php?success=0';
+        </script>";
+        }
+    } else {
+        echo "
+        <script>
+            alert('Previous password not correct!');
+            window.location.href='user-page.php';
+        </script>";
+    }
 }

@@ -41,6 +41,15 @@ require "db-config.php";
                 }?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <?php
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE && ((isset($_SESSION['is_company'])  && $_SESSION['is_company'] === TRUE) || (isset($_SESSION['is_admin'])) && $_SESSION['is_admin'] === TRUE)) {
+                    echo '<li>';
+                    echo '<a href="job_form.php" class="btn add-job-button">';
+                    echo '<span class="glyphicon glyphicon-plus"></span>';
+                    echo 'Add Job';
+                    echo '</a>';
+                    echo '</li>';
+                }?>
                 <li>
                     <?php
                         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
@@ -64,13 +73,6 @@ require "db-config.php";
         <div class="col-sm-8 text-left middle">
             <div class="text-center scaled-1-2">
                 <form class="navbar-form" id="search-form">
-                    <?php
-                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE && ((isset($_SESSION['is_company'])  && $_SESSION['is_company'] === TRUE) || (isset($_SESSION['is_admin'])) && $_SESSION['is_admin'] === TRUE)) {
-                        echo '<a href="job_form.php" class="btn btn-success add-job-button">';
-                        echo '<span class="glyphicon glyphicon-plus"></span>';
-                        echo 'Add Job';
-                        echo '</a>';
-                    }?>
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search">
                         <div class="input-group-btn">

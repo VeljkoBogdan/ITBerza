@@ -13,6 +13,7 @@ header {
     background-color: black;
 }
 
+/*region Card*/
 .card-rounded {
     min-height: 15pt;
     border-radius: 10px; /* Adjust the value as per your preference */
@@ -33,15 +34,9 @@ header {
 .card {
     background-color: #bebebe;
 }
+/*endregion*/
 
-
-
-.scaled-1-2 {
-    transform: scale(1.2);
-    margin-top: 10pt;
-    margin-bottom: 10pt;
-}
-
+/*region Link Disabled*/
 .link-disabled {
     color: inherit;
     text-decoration: none !important;
@@ -54,7 +49,9 @@ header {
     text-decoration: none !important;
     color: inherit !important;
 }
+/*endregion*/
 
+/*region Colors*/
 .red {
     color: red;
 }
@@ -62,6 +59,12 @@ header {
 .gray {
     margin-top: -15pt;
     color: #5a5a5a;
+}
+/*endregion*/
+
+.add-job-button {
+    padding-top: 5pt;
+    padding-bottom: 5pt;
 }
 
 #topOfPage {

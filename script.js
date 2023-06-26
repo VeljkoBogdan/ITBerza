@@ -25,22 +25,28 @@ signUpForm.addEventListener('submit', function(event) {
 */
 
 window.onload = function() {
-    // Company checkbox
-    let checkbox = document.getElementById('company-check-box');
-    let companyInputs = document.getElementById('company-input');
+    // Extract the base page name from the URL
+    let urlParts = window.location.pathname.split('/');
+    let pageName = urlParts[urlParts.length - 1].split('?')[0]; // Remove GET variables
 
-    // Company checkbox reset
-    companyInputs.style.display = 'none';
-    // Company checkbox listener
-    checkbox.addEventListener('change', function() {
-            // If the checkbox is checked, show the additional form inputs
-            if (checkbox.checked) {
-                companyInputs.style.display = 'block';
-            } else {
-                // Otherwise, hide the additional form inputs
-                companyInputs.style.display = 'none';
-            }
-        });
+    // Check if the current page is "sign-up.php"
+    if (pageName === "sign-up.php") {
+        let checkbox = document.getElementById('company-check-box');
+        let companyInputs = document.getElementById('company-input');
+
+        // Company checkbox reset
+        companyInputs.style.display = 'none';
+        // Company checkbox listener
+        checkbox.addEventListener('change', function() {
+                // If the checkbox is checked, show the additional form inputs
+                if (checkbox.checked) {
+                    companyInputs.style.display = 'block';
+                } else {
+                    // Otherwise, hide the additional form inputs
+                    companyInputs.style.display = 'none';
+                }
+            });
+    }
 }
 
 // Form validation function
@@ -230,6 +236,27 @@ function validatePasswordRecoveryEmail() {
     alert(isValid);
     return isValid;
 }
+// Change user password validation function
+function validatePasswordChange() {
+    let isValid = true;
+    let password = document.getElementById("password").value;
+    let newPassword = document.getElementById('new-password').value;
+    let confirmPassword = document.getElementById("confirm-password").value;
+
+    if(validatePassword(password) === false || password===""){
+        isValid = false;
+        document.getElementById('password-error').innerHTML = "The password must have 8 characters, at least one number, uppercase letter and special character!";
+    }
+    if(validatePassword(newPassword) === false || newPassword===""){
+        isValid = false;
+        document.getElementById('new-password-error').innerHTML = "The password must have 8 characters, at least one number, uppercase letter and special character!";
+    }
+    if(confirmPassword !== newPassword || confirmPassword===""){
+        isValid = false;
+        document.getElementById('confirm-password-error').innerHTML = "Passwords don't match!";
+    }
+    return isValid;
+}
 
 // Login and Signup password visibility toggler
 function togglePasswordVisibilitySignUp(){
@@ -262,6 +289,25 @@ function togglePasswordVisibilityLogin(){
         // If the password is invisible
         passwordInput.type = 'password';
         toggleButton.textContent = 'Show';
+    }
+}
+function togglePasswordVisibilityNew(){
+    let newPassword = document.getElementById('new-password');
+    let confirmPasswordInput = document.getElementById('confirm-password');
+    let toggleButtonNew = document.getElementById('toggle-button-new');
+    let toggleButtonConfirm = document.getElementById('toggle-button-confirm');
+    // If the password is visible
+    if (newPassword.type === 'password') {
+        newPassword.type = 'text';
+        confirmPasswordInput.type = 'text';
+        toggleButtonNew.textContent = 'Hide';
+        toggleButtonConfirm.textContent = 'Hide';
+    } else {
+        // If the password is invisible
+        newPassword.type = 'password';
+        confirmPasswordInput.type = 'password';
+        toggleButtonNew.textContent = 'Show';
+        toggleButtonConfirm.textContent = 'Show';
     }
 }
 

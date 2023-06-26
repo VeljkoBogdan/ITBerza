@@ -60,6 +60,49 @@ require 'db-config.php';
 
         <div class="col-sm-8 text-left middle">
             <div class="container col-sm-12">
+                <form class="form-horizontal" id="change-data-form" name="change-data-form" action="confirmation.php" method="post" onsubmit="return validatePasswordChange()">
+                    <div class="form-group">
+                        <label class="control-label" for="password">Your previous password:</label>
+                        <span class="red" id="password-error"></span>
+                        <div class="input-group">
+                            <input class="form-control col-xs-3" type="password" name="password" id="password">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="toggle-button" onclick="togglePasswordVisibilityLogin()">
+                                    Show
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="new-password">Your New Password: </label>
+                        <span class="red" id="new-password-error"></span>
+                        <div class="input-group">
+                            <input class="form-control col-xs-3" type="password" name="new-password" id="new-password">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="toggle-button-new"
+                                        onclick="togglePasswordVisibilityNew()">
+                                    Show
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="confirm-password">Confirm New Password: </label>
+                        <span class="red" id="confirm-password-error"></span>
+                        <div class="input-group">
+                            <input class="form-control col-xs-3" type="password" name="confirm-password" id="confirm-password">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="toggle-button-confirm"
+                                        onclick="togglePasswordVisibilityNew()">
+                                    Show
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-default border" name="change" id="change" type="submit" value="Submit changes"></input><br>
+                    </div>
+                </form>
             </div>
         </div>
 
