@@ -2,6 +2,7 @@
 session_start();
 require "db-config.php";
 require 'ban-check.php';
+require 'login-check.php';
 
 if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     header("Location: index.php");
@@ -12,7 +13,7 @@ if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 
 <html lang="en">
 <head>
-    <title>IT Berza</title>
+    <title>TechTalentHub</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -30,7 +31,7 @@ if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">IT Berza</a>
+            <a class="navbar-brand" href="index.php">TechTalentHub</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -51,9 +52,12 @@ if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
                     echo '<li>';
                     echo '<a href="job-form.php" class="btn add-job-button">';
                     echo '<span class="glyphicon glyphicon-plus"></span>';
-                    echo 'Add Job';
+                    echo ' Add Job';
                     echo '</a>';
                     echo '</li>';
+                }
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
+                    echo "<li><a href=\"chat-list.php\">Messages</a></li>";
                 }?>
                 <li>
                     <?php
@@ -100,8 +104,16 @@ if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     </div>
 </div>
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center ">
+    <br>
     <p>&copy; 2023 Your Website. All rights reserved.</p>
+    <br>
+    <p>
+        Veljko Bogdan<br>
+        vtsveljkobogdan@gmail.com<br>
+        +381 65 421 7454<br>
+        Random Address, Subotica, Serbia
+    </p>
 </footer>
 
 <!--        SCRIPTS           -->

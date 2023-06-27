@@ -46,4 +46,85 @@ $(document).ready(function() {
     $('#toggleFormBtn').click(function() {
         $('#searchForm').slideToggle();
     });
+
+// -----------------------------------------CHAT---------------------------------------------- //
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var currentUser = urlParams.get('currentUser');
+    var otherUser = urlParams.get('otherUser');
+
+    // Load the initial messages
+    loadMessages();
+
+    // Load messages when the page is loaded and every 3 seconds
+    setInterval(function() {
+        loadMessages();
+    }, 3000);
+
+    // Handle sending a new message
+    $('#send-btn').click(function() {
+        var message = $('#message-input').val();
+        if (message.trim() !== '') {
+            message = "<small>" + currentUserEmail + "</small>: " + message;
+            sendMessage(message);
+            $('#message-input').val('');
+        }
+    });
+
+    // Handle pressing Enter key to send a message
+    $('#message-input').keypress(function(event) {
+        if (event.which === 13) {
+            var message = $('#message-input').val();
+            if (message.trim() !== '') {
+                message = "<small>" + currentUserEmail + "</small>: " + message;
+                sendMessage(message);
+                $('#message-input').val('');
+            }
+            return false;
+        }
+    });
+
+    // Load messages from the server
+    function loadMessages() {
+        $.ajax({
+            url: 'load_messages.php',
+            type: 'POST',
+            data: {
+                currentUser: currentUser,
+                otherUser: otherUser
+            },
+            success: function(response) {
+                $('#message-container').html(response);
+                scrollChatToBottom();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    // Send a new message to the server
+    function sendMessage(message) {
+        $.ajax({
+            url: 'send_message.php',
+            type: 'POST',
+            data: {
+                currentUser: currentUser,
+                otherUser: otherUser,
+                message: message
+            },
+            success: function(response) {
+                loadMessages(); // Reload messages after sending
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    // Scroll the chat container to the bottom
+    function scrollChatToBottom() {
+        var container = document.getElementById('message-container');
+        container.scrollTop = container.scrollHeight;
+    }
 });

@@ -8,7 +8,7 @@ require 'ban-check.php';
 
 <html lang="en">
 <head>
-    <title>IT Berza</title>
+    <title>TechTalentHub</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -26,7 +26,7 @@ require 'ban-check.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">IT Berza</a>
+            <a class="navbar-brand" href="index.php">TechTalentHub</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -47,9 +47,12 @@ require 'ban-check.php';
                     echo '<li>';
                     echo '<a href="job-form.php" class="btn add-job-button">';
                     echo '<span class="glyphicon glyphicon-plus"></span>';
-                    echo 'Add Job';
+                    echo ' Add Job';
                     echo '</a>';
                     echo '</li>';
+                }
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
+                    echo "<li><a href=\"chat-list.php\">Messages</a></li>";
                 }?>
                 <li>
                     <?php
@@ -71,8 +74,19 @@ require 'ban-check.php';
             <div class="card-container"></div>
         </div>
         <div class="col-sm-8 text-left middle" id="topOfPage">
-            <h1 class="text-center">Contact</h1>
+            <h1 class="text-center">Contact</h1><br><hr>
             <div class="container col-sm-12">
+                <div id="contact-info">
+                    <p class="well">
+                        Name: Veljko Bogdan<br>
+                        Email: vtsveljkobogdan@gmail.com<br>
+                        Phone: +381 65 421 7454<br>
+                        Address: Random Address, Subotica, Serbia
+                    </p><hr>
+                    <h4>
+                        Feel free to contact us through any of the provided contact information. We are available for inquiries, discussions, or any other IT-related matters. Don't hesitate to reach out!
+                    </h4>
+                </div>
 
             </div>
 

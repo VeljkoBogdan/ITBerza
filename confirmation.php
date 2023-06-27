@@ -2,6 +2,7 @@
 session_start();
 require 'db-config.php';
 require 'ban-check.php';
+require 'login-check.php';
 
 $options = [
     'cost' => 10
@@ -27,13 +28,13 @@ function sendMail($email, $v_cod){
         $mail->Username = '22c4c0da32c879';
         $mail->Password = '4a9ef2fd22f86a';
 
-        $mail->setFrom('webmaster@example.com', 'Webmaster');
+        $mail->setFrom('techtalenthub@gmail.com', 'TechTalentHub');
         $mail->addAddress($email);
 
         $mail->isHTML(true);
         $mail->Subject = 'Email Verification for Your Account';
-        $mail->Body    = "Thanks for registration.<br>Click the link to verify your email address:<br>
-            <a href='http://localhost:63342/ITBerza/verify.php?email=$email&v_cod=$v_cod'>Verify</a><br><hr><br>If this is not you, ignore this email.";
+        $mail->Body    = "<p class=\"text-center\">Thank You for registering!<br>Click the link below to verify your email address:<br>
+            <a href='http://localhost:63342/ITBerza/verify.php?email=$email&v_cod=$v_cod'>Verify</a></p><br><hr><br>If this is not you, ignore this email.";
         $mail->send();
         return true;
     } catch (Exception $e) {
@@ -91,6 +92,7 @@ if (isset($_POST['login'])) {
     if ($row && password_verify($password_login, $row['password'])) {
         $_SESSION['logged_in'] = true;
         $_SESSION['email'] = $row['email'];
+        $_SESSION['id'] = $row['id_user'];
         // Check if admin
         if($row['is_admin']) $_SESSION['is_admin'] = true;
         // Check if company

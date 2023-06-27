@@ -194,3 +194,42 @@ footer {
 .display-flex-child {
     flex-grow: 1;
 }
+
+/*region Chat css*/
+#chatbox {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#message-container {
+    height: 300px;
+    overflow-y: scroll;
+    margin: 10px 0px 10px 0px;
+    border: 1px solid #000000;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 10px;
+    background: #f1f1f1;
+
+}
+
+#message-input {
+    width: 50%;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#send-btn {
+
+}
+
+.sent {
+    color: #b60000;
+}
+
+.received {
+    color: inherit;
+}
+
+/*endregion */

@@ -1,8 +1,8 @@
 <?php
 session_start();
-require 'db-config.php';
+require "db-config.php";
 require 'ban-check.php';
-require 'login-check.php';
+require_once 'login-check.php';
 ?>
 
 <!DOCTYPE html>
@@ -68,88 +68,24 @@ require 'login-check.php';
     </div>
 </nav>
 
-<div class="container-fluid text-center">
+<div class="container-fluid col-sm-12 text-center">
     <div class="row content">
-        <div class="sidenav col-sm-2 ">
+        <div class="col-sm-2 sidenav">
             <a href="#" id="load-card-boxes-link" class="load-card-boxes-link link-disabled display-flex"><button class="btn btn-default border display-flex-child">Expiring Soon</button></a><br>
-            <div class="card-container"></div>
         </div>
+        <div class="col-sm-8 text-left middle"><br>
+            <div class="col-sm-12">
+                <div id="chatbox" class="content container">
+                    <div id="message-container"></div>
+                    <input type="text" id="message-input" placeholder="Type your message">
+                    <button id="send-btn" class="btn btn-success">Send</button>
+                </div>
 
-        <div class="col-sm-8 text-left middle">
-            <div class="container col-sm-12">
-                <?php
-
-                if (isset($_GET['email']) && isset($_GET['v_cod'])) {
-                    $email = $_GET['email'];
-                    $v_cod = $_GET['v_cod'];
-
-                    $sql = "SELECT * FROM users WHERE email = '$email' AND verification_id = '$v_cod'";
-                    $result = $conn->query($sql);
-
-                    if ($result) {
-                        if ($result->rowCount() == 1) {
-                            $row = $result->fetch(PDO::FETCH_ASSOC);
-                            $fetch_email = $row['email'];
-
-                            if ($row['verification_status'] == 0) {
-                                echo "<div class=\'text-center\'> <span> You need to verify your email first! </span> </div>";
-                            }
-                            else{
-                                echo "<form class=\"form-horizontal\" id=\"recovery-form\" method=\"post\" action=\"confirmation.php?email=$email\" onsubmit=\"return validatePasswordRecovery()\">
-                    <div class=\"text-center\">
-                        <h3>Account recovery</h3>
-                    </div>
-                    <div class=\"form-group\">
-                        <label class=\"control-label\" for=\"password\">Your Password: </label>
-                        <span id=\"passwordError\"></span>
-                        <div class=\"input-group\">
-                            <input class=\"form-control col-xs-3\" type=\"password\" name=\"password\" id=\"password\">
-                            
-                            <div class=\"input-group-btn\">
-                                <button class=\"btn btn-default\" type=\"button\" id=\"toggle-button\"
-                                        onclick=\"togglePasswordVisibilitySignUp()\">
-                                    Show
-                                </button>
-                            </div>
-                            
-                        </div>
-                        <span class=\"password-error red\" id=\"password-error\"></span>
-                    </div>
-                    <div class=\"form-group\">
-                        <label class=\"control-label\" for=\"confirm-password\">Confirm Password: </label>
-                        <span id=\"confirmPasswordError\"></span>
-                        <div class=\"input-group\">
-                            <input class=\"form-control col-xs-3\" type=\"password\" name=\"confirm-password\" id=\"confirm-password\">
-                            
-                            <div class=\"input-group-btn\">
-                                <button class=\"btn btn-default\" type=\"button\" id=\"toggle-button-confirm\"
-                                        onclick=\"togglePasswordVisibilitySignUp()\">
-                                    Show
-                                </button>
-                            </div>
-                        </div>
-                        <span class=\"password-confirmation-error red\" id=\"password-confirmation-error\"></span>
-                    </div>
-                    
-                    <div class=\"form-group\">
-                        <button class=\"btn btn-default border\" type=\"submit\" name=\"request-new-password\" id=\"request-new-password\">
-                            Set password
-                        </button>
-                    </div>
-                </form>";
-                            }
-                        }
-                    }
-                }else{
-                    echo "<script>
-                alert('Server down!');
-                window.location.href='index.php'
-            </script>";
-                }
-                ?>
+                <script>
+                    var currentUserEmail = '<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>';
+                </script>
             </div>
         </div>
-
         <div class="col-sm-2 sidenav">
             <div class="well">
                 <p>ADS</p>
@@ -181,6 +117,3 @@ require 'login-check.php';
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-

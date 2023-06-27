@@ -59,9 +59,11 @@ function validateForm(type) {
         //validate
         if(validateEmail(email) === false || email===""){
             isValid = false;
+            document.getElementById('email-error').innerHTML = "Enter a valid email address";
         }
-        if(password==="" || password.length < 8){
+        if(validatePassword(password) === false || password===""){
             isValid = false;
+            document.getElementById('password-error').innerHTML = "Enter a valid password";
         }
     }
     else{
@@ -277,6 +279,27 @@ function validateAdminForm() {
         }
     }
     return true;
+}
+// Validate Update User Info
+function validateUpdateInfo() {
+    let isValid = true;
+    let firstName = document.getElementById("name").value;
+    let lastName = document.getElementById('last-name').value;
+    let phone = document.getElementById("phone").value;
+
+    if(validatePhone(phone) === false || phone===""){
+        isValid = false;
+        document.getElementById('phone-error').innerHTML = "Enter a valid phone number (eg. 111-222-3333)!";
+    }
+    if(firstName==="" || !isNaN(firstName)){
+        isValid = false;
+        document.getElementById('first-name-error').innerHTML = "First name cannot be empty or numeric!";
+    }
+    if(lastName==="" || !isNaN(lastName)){
+        isValid = false;
+        document.getElementById('last-name-error').innerHTML = "Last name cannot be empty or numeric!";
+    }
+    return isValid;
 }
 
 // Login and Signup password visibility toggler

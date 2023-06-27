@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2023 at 04:45 PM
+-- Generation Time: Jun 27, 2023 at 12:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -378,6 +378,7 @@ INSERT INTO `employment_type` (`id_employment_type`, `employment_type`) VALUES
 
 CREATE TABLE `jobs` (
   `id_job` int(11) NOT NULL,
+  `id_company` int(11) DEFAULT 1,
   `contact_person` varchar(255) NOT NULL,
   `contact_email` varchar(255) NOT NULL,
   `contact_telephone` varchar(255) NOT NULL,
@@ -403,8 +404,58 @@ CREATE TABLE `jobs` (
 -- Dumping data for table `jobs`
 --
 
-INSERT INTO `jobs` (`id_job`, `contact_person`, `contact_email`, `contact_telephone`, `company_name`, `poster_company_name`, `tax_id_number`, `position_name`, `category`, `city`, `remote`, `qualifications`, `employment_type`, `text`, `signup_email`, `signup_telephone`, `duration`, `period_from`, `period_to`, `is_enabled`) VALUES
-(1, 'Veljko Bogdan', 'action@dr.com', '065-421-7454', 'Web', 'Web', 10000002, 'Web', '1', '90', 1, '1', '1', 'document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\";', 'action@dr.com', '065-421-7454', 30, NULL, NULL, 0);
+INSERT INTO `jobs` (`id_job`, `id_company`, `contact_person`, `contact_email`, `contact_telephone`, `company_name`, `poster_company_name`, `tax_id_number`, `position_name`, `category`, `city`, `remote`, `qualifications`, `employment_type`, `text`, `signup_email`, `signup_telephone`, `duration`, `period_from`, `period_to`, `is_enabled`) VALUES
+(1, 0, 'Veljko Bogdan', 'action@dr.com', '065-421-7454', 'Web', 'Web', 10000002, 'Web', '1', '90', 1, '1', '1', 'document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\"; document.getElementById(\'contact_person_error\').innerHTML=\"Error\";', 'action@dr.com', '065-421-7454', 30, NULL, NULL, 0),
+(2, 0, 'Veljko Bogdan', 'action@dr.com', '0654217454', 'TechTalentHub', 'TechTalentHub', 10000003, 'Market administrator position', '2', '85', 1, '4', '4', 'This is text', 'action@dr.com', '0654217454', 30, '2023-06-04', '2023-08-31', 1),
+(3, 0, 'John Smith', 'john@example.com', '1234567890', 'ABC Corporation', 'ABC Corporation', 12345678, 'Software Developer', '8', '200', 0, '2', '3', 'Join our development team and work on exciting projects.', 'jobs@abc.com', '2345678901', 30, '2023-07-01', '2023-07-31', 0),
+(4, 0, 'Emily Johnson', 'emily@example.com', '2345678901', 'XYZ Solutions', 'XYZ Solutions', 87654321, 'Marketing Specialist', '12', '150', 1, '4', '2', 'Join our marketing team and create impactful campaigns.', 'careers@xyz.com', '3456789012', 15, '2023-08-01', '2023-08-15', 0),
+(5, 0, 'Michael Brown', 'michael@example.com', '3456789012', '123 Industries', '123 Industries', 76543210, 'Sales Representative', '9', '220', 0, '3', '1', 'Join our sales team and drive revenue growth.', 'careers@123.com', '4567890123', 30, '2023-09-01', '2023-09-30', 0),
+(6, 0, 'Emma Davis', 'emma@example.com', '4567890123', 'ABC Corporation', 'ABC Corporation', 65432109, 'Customer Service Representative', '4', '130', 1, '2', '2', 'Join our customer service team and provide excellent support.', 'jobs@abc.com', '5678901234', 15, '2023-10-01', '2023-10-15', 0),
+(7, 0, 'Noah Wilson', 'noah@example.com', '5678901234', 'XYZ Solutions', 'XYZ Solutions', 54321098, 'Financial Analyst', '23', '170', 0, '5', '3', 'Join our finance team and analyze financial data.', 'careers@xyz.com', '6789012345', 30, '2023-11-01', '2023-11-30', 0),
+(8, 0, 'Olivia Taylor', 'olivia@example.com', '6789012345', '123 Industries', '123 Industries', 43210987, 'Human Resources Assistant', '16', '140', 1, '3', '1', 'Join our HR team and support our human resources initiatives.', 'careers@123.com', '7890123456', 15, '2023-12-01', '2023-12-15', 0),
+(9, 0, 'William Clark', 'william@example.com', '7890123456', 'ABC Corporation', 'ABC Corporation', 32109876, 'IT Technician', '7', '180', 0, '4', '2', 'Join our IT team and provide technical support to our staff.', 'jobs@abc.com', '8901234567', 30, '2024-01-01', '2024-01-31', 0),
+(10, 0, 'Sophia Turner', 'sophia@example.com', '8901234567', 'XYZ Solutions', 'XYZ Solutions', 21098765, 'Project Manager', '21', '160', 1, '6', '3', 'Join our project management team and oversee successful project delivery.', 'careers@xyz.com', '9012345678', 15, '2024-02-01', '2024-02-15', 0),
+(11, 0, 'Liam Harris', 'liam@example.com', '9012345678', '123 Industries', '123 Industries', 10987654, 'Data Scientist', '10', '240', 0, '7', '1', 'Join our data science team and analyze complex datasets.', 'jobs@123.com', '0123456789', 30, '2024-03-01', '2024-03-31', 0),
+(12, 0, 'Isabella Martinez', 'isabella@example.com', '0123456789', 'ABC Corporation', 'ABC Corporation', 98765432, 'Web Developer', '15', '110', 1, '5', '2', 'Join our web development team and build stunning websites.', 'careers@abc.com', '1234567890', 15, '2024-04-01', '2024-04-15', 0),
+(13, 0, 'Mason Jones', 'mason@example.com', '1234567890', 'XYZ Solutions', 'XYZ Solutions', 87654321, 'UX/UI Designer', '20', '200', 0, '4', '3', 'Join our design team and create user-friendly interfaces.', 'careers@xyz.com', '2345678901', 30, '2024-05-01', '2024-05-31', 0),
+(14, 0, 'Sophia Clark', 'sophia@example.com', '2345678901', '123 Industries', '123 Industries', 76543210, 'Content Writer', '13', '240', 1, '5', '2', 'Join our content team and write engaging articles.', 'careers@123.com', '3456789012', 15, '2024-06-01', '2024-06-15', 0),
+(15, 0, 'James Taylor', 'james@example.com', '3456789012', 'ABC Corporation', 'ABC Corporation', 65432109, 'Marketing Manager', '9', '200', 0, '4', '3', 'Join our marketing team and oversee marketing campaigns.', 'jobs@abc.com', '4567890123', 30, '2024-07-01', '2024-07-31', 0),
+(16, 0, 'Olivia Wilson', 'olivia@example.com', '4567890123', 'XYZ Solutions', 'XYZ Solutions', 54321098, 'Business Analyst', '19', '130', 1, '5', '3', 'Join our business team and analyze market trends.', 'careers@xyz.com', '5678901234', 15, '2024-08-01', '2024-08-15', 0),
+(17, 0, 'Sophia Turner', 'sophia@example.com', '5678901234', '123 Industries', '123 Industries', 43210987, 'Operations Manager', '17', '170', 0, '6', '2', 'Join our operations team and optimize our processes.', 'careers@123.com', '6789012345', 30, '2024-09-01', '2024-09-30', 0),
+(18, 0, 'Logan Thompson', 'logan@example.com', '6789012345', 'ABC Corporation', 'ABC Corporation', 32109876, 'Quality Assurance Specialist', '6', '190', 1, '3', '1', 'Join our QA team and ensure the quality of our products.', 'jobs@abc.com', '7890123456', 15, '2024-10-01', '2024-10-15', 0),
+(19, 0, 'Ava Davis', 'ava@example.com', '7890123456', 'XYZ Solutions', 'XYZ Solutions', 21098765, 'Social Media Manager', '14', '150', 0, '4', '3', 'Join our marketing team and manage our social media presence.', 'careers@xyz.com', '9012345678', 30, '2024-11-01', '2024-11-30', 0),
+(20, 0, 'Ethan Wilson', 'ethan@example.com', '9012345678', '123 Industries', '123 Industries', 10987654, 'Research Analyst', '22', '120', 1, '5', '2', 'Join our research team and contribute to innovative projects.', 'careers@123.com', '0123456789', 15, '2024-12-01', '2024-12-15', 0),
+(21, 0, 'Mia Clark', 'mia@example.com', '0123456789', 'ABC Corporation', 'ABC Corporation', 98765432, 'Operations Analyst', '11', '220', 0, '4', '1', 'Join our operations team and analyze our business processes.', 'jobs@abc.com', '1234567890', 30, '2025-01-01', '2025-01-31', 1),
+(22, 0, 'Liam Harris', 'liam@example.com', '1234567890', 'XYZ Solutions', 'XYZ Solutions', 87654321, 'Graphic Designer', '18', '100', 1, '5', '3', 'Join our design team and bring creativity to our projects.', 'careers@xyz.com', '2345678901', 15, '2025-02-01', '2025-02-15', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id_message` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `timestamp` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id_message`, `sender_id`, `receiver_id`, `message`, `timestamp`) VALUES
+(1, 14, 0, 'Hello', '2023-06-27'),
+(2, 14, 0, 'How are you?', '2023-06-27'),
+(3, 14, 0, 'vtsveljkobogdan@gmail.com: Hey!', '2023-06-27'),
+(4, 14, 0, '<small>vtsveljkobogdan@gmail.com</small>: Heya!', '2023-06-27'),
+(5, 14, 0, '<small>vtsveljkobogdan@gmail.com</small>: ', '2023-06-27'),
+(6, 14, 0, '<small>vtsveljkobogdan@gmail.com</small>: hehe', '2023-06-27'),
+(7, 14, 0, '<small>vtsveljkobogdan@gmail.com</small>: ', '2023-06-27'),
+(8, 14, 0, '<small>vtsveljkobogdan@gmail.com</small>: ', '2023-06-27'),
+(9, 14, 0, '<small>vtsveljkobogdan@gmail.com</small>: ', '2023-06-27');
 
 -- --------------------------------------------------------
 
@@ -461,7 +512,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id_user`, `first_name`, `last_name`, `email`, `password`, `telephone`, `biography`, `is_company`, `company_name`, `website`, `address`, `description`, `is_banned`, `verification_id`, `verification_status`, `is_admin`) VALUES
 (13, 'Veljko', 'Bogdan', 'action@dr.com', '$2y$10$xNasmgwclF3nNpC/Q5Ce2.bC4vQLhLa8UOt9v7LD62.tTDShNtSv6', '065-421-7454', 'null', 0, '', '', '', NULL, 0, '41f1cb135a4d47f52f82d6764883db73', 1, 0),
-(14, 'Veljko', 'Bogdan', 'vtsveljkobogdan@gmail.com', '$2y$10$XJ8EBzNDzyuYhRkuIBE0fO4AgxPEdjMPHqAIBt65gqcOutHoZ8moG', '0654217454', 'I am admin!', 0, 'Web', 'Web', 'Web', 'Web', 0, '6e6eebf3430ac0c867ed113cb1c1f3e8', 1, 1),
+(14, 'Bogdan', 'Bogdan', 'vtsveljkobogdan@gmail.com', '$2y$10$XJ8EBzNDzyuYhRkuIBE0fO4AgxPEdjMPHqAIBt65gqcOutHoZ8moG', '0654217454', 'I am admin!', 0, 'Web', 'Web', 'Web', 'Web', 0, '6e6eebf3430ac0c867ed113cb1c1f3e8', 1, 1),
 (15, 'Veljko', 'Bogdan', 'johny.t@comic.com', 'Giornogiovanna355!', '0654217454', 'null', 1, 'Web', 'Web', 'Osmi Mart 9', 'Web', 0, 'eaed62c737d1ed70371439a1141bcfec', 1, 0);
 
 --
@@ -498,6 +549,12 @@ ALTER TABLE `employment_type`
 --
 ALTER TABLE `jobs`
   ADD PRIMARY KEY (`id_job`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id_message`);
 
 --
 -- Indexes for table `qualifications`
@@ -544,7 +601,13 @@ ALTER TABLE `employment_type`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id_job` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_job` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id_message` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `qualifications`

@@ -77,7 +77,8 @@ $sql = "SELECT
     j.duration,
     j.period_from,
     j.period_to,
-    j.is_enabled
+    j.is_enabled,
+    j.id_company
 FROM
     jobs j
 JOIN categories c ON
@@ -104,7 +105,7 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     $dateFrom = date('Y-F-d', strtotime($row['period_from']));
     $dateTo = date('Y F d', strtotime($row['period_to']));
 
-    echo '<a href="job-details.php?id=' . $row['id_job'] . '" class="link-disabled">';
+    echo '<a href="job-details.php?id=' . $row['id_job'] . '&idCompany='.$row['id_company'].'" class="link-disabled">';
     echo '<br>';
     echo '<div class="card card-rounded">';
     echo '<div class="card-header card-rounded ';

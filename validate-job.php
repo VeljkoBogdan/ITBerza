@@ -1,7 +1,8 @@
 <?php
 session_start();
 require_once 'db-config.php';
-require 'ban-check.php';
+require_once 'ban-check.php';
+require_once 'login-check.php';
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {

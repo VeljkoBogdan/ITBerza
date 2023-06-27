@@ -8,7 +8,7 @@ require 'ban-check.php';
 
 <html lang="en">
 <head>
-    <title>IT Berza</title>
+    <title>TechTalentHub</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -26,7 +26,7 @@ require 'ban-check.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">IT Berza</a>
+            <a class="navbar-brand" href="index.php">TechTalentHub</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -47,9 +47,13 @@ require 'ban-check.php';
                     echo '<li>';
                     echo '<a href="job-form.php" class="btn add-job-button">';
                     echo '<span class="glyphicon glyphicon-plus"></span>';
-                    echo 'Add Job';
+                    echo ' Add Job';
                     echo '</a>';
                     echo '</li>';
+                }
+
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
+                    echo "<li><a href=\"chat-list.php\">Messages</a></li>";
                 }?>
                 <li>
                     <?php
@@ -95,6 +99,7 @@ require 'ban-check.php';
                 <h3 class="text-center"></h3>
             </div>
             <button class="btn btn-primary border" id="toggleFormBtn"> Filter </button>
+            <a href="list-archived.php" class="link-disabled"><button class="btn btn-default border"> See Expired Jobs</button></a>
             <form style="display: none;" id="searchForm" class="form-horizontal" method="GET" action="index.php">
                 <div class="form-group container-fluid">
                     <label class="control-label" for="categories">Category:</label>
@@ -224,8 +229,16 @@ require 'ban-check.php';
     </div>
 </div>
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center ">
+    <br>
     <p>&copy; 2023 Your Website. All rights reserved.</p>
+    <br>
+    <p>
+        Veljko Bogdan<br>
+        vtsveljkobogdan@gmail.com<br>
+        +381 65 421 7454<br>
+        Random Address, Subotica, Serbia
+    </p>
 </footer>
 
 <!--        SCRIPTS           -->

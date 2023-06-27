@@ -8,7 +8,7 @@ require 'ban-check.php';
 
 <html lang="en">
 <head>
-    <title>IT Berza</title>
+    <title>TechTalentHub</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -26,7 +26,7 @@ require 'ban-check.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">IT Berza</a>
+            <a class="navbar-brand" href="index.php">TechTalentHub</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -47,9 +47,12 @@ require 'ban-check.php';
                     echo '<li>';
                     echo '<a href="job-form.php" class="btn add-job-button">';
                     echo '<span class="glyphicon glyphicon-plus"></span>';
-                    echo 'Add Job';
+                    echo ' Add Job';
                     echo '</a>';
                     echo '</li>';
+                }
+                if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===TRUE) {
+                    echo "<li><a href=\"chat-list.php\">Messages</a></li>";
                 }?>
                 <li>
                     <?php
@@ -80,6 +83,12 @@ require 'ban-check.php';
                         <h3 class="text-left">
                             <?php
                             $id = $_GET['id'];
+                            if(isset($_GET['idCompany'])){
+                                $idCompany = $_GET['idCompany'];
+                            }
+                            else{
+                                $idCompany=0;
+                            }
                             $dateTo = "";
 
                             include_once 'job-details-sql.php';
@@ -123,9 +132,12 @@ require 'ban-check.php';
                         <div class="text-center">
                         <?php
                         if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true){
-                            echo '<div class="text-center">
-                                    <a href="#">Contact Company</a>
-                                </div><br>';
+
+                            if (!isset($_SESSION['is_company'])) {
+                                echo '<div class="text-center">
+                                        <a href="chat.php?currentUser=' . $_SESSION['id'] . '&otherUser=' . $idCompany . '">Contact Company</a>
+                                    </div><br>';
+                            }
 
                             if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']===true){
                                 $sql = "SELECT is_enabled
@@ -142,8 +154,7 @@ require 'ban-check.php';
                                     // Determine the cube color based on the value of is_enabled
                                     $cubeColor = ($isEnabled == 1) ? 'green' : 'red';
 
-                                    // Output the colored cube
-                                    echo '<a class="cube link-disabled '.$cubeColor. '" href="validate-job.php?id='.$id.'&isEnabled='.$isEnabled.'"><button><h4>ENABLE / DISABLE</h4></button></a>';
+                                    echo '<a class="cube link-disabled '.$cubeColor. '" href="validate-job.php?id='.$id.'&isEnabled='.$isEnabled.'"><button><h4>ENABLE / DISABLE</h4></button></a><br><small>Green is enabled, red is disabled</small>';
                                 }
                             }
                         }
@@ -169,8 +180,16 @@ require 'ban-check.php';
     </div>
 </div>
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center ">
+    <br>
     <p>&copy; 2023 Your Website. All rights reserved.</p>
+    <br>
+    <p>
+        Veljko Bogdan<br>
+        vtsveljkobogdan@gmail.com<br>
+        +381 65 421 7454<br>
+        Random Address, Subotica, Serbia
+    </p>
 </footer>
 
 <!--        SCRIPTS           -->

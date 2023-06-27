@@ -1,13 +1,13 @@
 <?php
 include_once 'db-config.php';
 
-$sql = "SELECT id_job, position_name, company_name
+$s = "SELECT id_job, position_name, company_name
         FROM jobs
         WHERE period_to >= CURDATE()
         ORDER BY period_to ASC
         LIMIT 5";
 
-$result = $conn->query($sql);
+$result = $conn->query($s);
 
 $response = array();
 
