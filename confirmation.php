@@ -2,7 +2,6 @@
 session_start();
 require 'db-config.php';
 require 'ban-check.php';
-require 'login-check.php';
 
 $options = [
     'cost' => 10
