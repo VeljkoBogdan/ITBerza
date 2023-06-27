@@ -1,6 +1,6 @@
 /*region Tags*/
 html, body {
-    font-family: Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     height: 100%;
 }
@@ -17,13 +17,27 @@ a {
     color: #0000A0;
 }
 
+h1,
+h2,
+h3,
+h3,
+h4,
+.navbar-brand {
+    font-family: "Arial Black", sans-serif;
+}
+
+h4.white {
+    color: #b4c1d3;
+}
+
 hr {
     border-color: #ffffff;
 }
 
 header {
-    background-color: black;
+    background: #110B11;
 }
+
 /*endregion*/
 
 /*region Card*/
@@ -32,9 +46,10 @@ header {
     border-radius: 10px; /* Adjust the value as per your preference */
 }
 .card-header {
-    background: #e8e8e8;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #c8cce7, #6f7de8);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #c8cce7, #6f7de8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #EEF0F2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #0c5b3c, #0D21A1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #0c5b3c, #0D21A1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #EEF0F2;
     margin:0;
     height:100%;
     padding-left: 5pt;
@@ -49,9 +64,10 @@ header {
 }
 
 .card-header-expired {
-    background: #bebebe !important;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #bebebe, #817474) !important;  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #bebebe, #817474) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #9A9788 !important;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #503F45, #8E8B7B) !important;  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #503F45, #8E8B7B) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #EEF0F2;
 }
 
 .card-body-expired {
@@ -59,17 +75,25 @@ header {
 }
 
 .card {
-    background-color: #e8e8e8;
+    background-color: #EEF0F2;
 }
 /*endregion*/
 
 /*region Side Cards*/
 .card-side {
-    background: #c8cce7;  /* fallback for old browsers */
+    background: #EEF0F2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #232ED1, #0D21A1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #232ED1, #0D21A1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #EEF0F2;
+}
+
+.card-subtitle {
+    color: #EEF0F2;
+    padding-bottom: 20px;
 }
 
 .card-side-body {
-
+    color: #EEF0F2;
 }
 /*endregion*/
 
@@ -128,10 +152,11 @@ footer.container-fluid {
     display: flex;
     flex-direction: column;
     min-height: 30vh;
+    background: #110B11;
 }
 /*endregion Footer*/
 
-/* On small screens, set height to 'auto' for sidenav and grid */
+/*region On small screens*/
 @media screen and (max-width: 767px) {
     .sidenav {
         height: auto;
@@ -153,6 +178,7 @@ footer.container-fluid {
         min-height: 500px !important;
     }
 }
+/* endregion*/
 
 .add-job-button {
      padding-top: 5pt;
@@ -181,7 +207,7 @@ footer.container-fluid {
 /* Set gray background color and 100% height */
 .sidenav {
     padding-top: 20px;
-    background-color: #f1f1f1;
+    background-color: #EEF0F2;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -189,7 +215,7 @@ footer.container-fluid {
 
 /* Set black background color, white text and some padding */
 footer {
-    background-color: #555;
+    background: #110B11;
     color: white;
     padding: 15px;
 }
@@ -218,12 +244,12 @@ footer {
 #message-container {
     height: 300px;
     overflow-y: scroll;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0 10px 0;
     border: 1px solid #000000;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
     padding: 10px;
-    background: #f1f1f1;
+    background: #EEF0F2;
 
 }
 
