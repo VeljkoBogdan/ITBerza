@@ -74,7 +74,7 @@ if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 
 <div class="container-fluid col-sm-12 text-center">
     <div class="row content">
-        <div class="col-sm-2 sidenav">
+        <div class="col-sm-2 sidenav sidenav-hidden">
 
         </div>
         <div class="col-sm-8 text-left middle">
@@ -98,7 +98,7 @@ if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
                     </form>
             </div>
         </div>
-        <div class="col-sm-2 sidenav">
+        <div class="col-sm-2 sidenav sidenav-hidden">
 
         </div>
     </div>

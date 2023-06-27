@@ -69,7 +69,7 @@ require 'ban-check.php';
 
 <div class="container-fluid text-center">
     <div class="row content">
-        <div class="col-sm-2 sidenav">
+        <div class="col-sm-2 sidenav sidenav-hidden">
             <a href="#" id="load-card-boxes-link" class="load-card-boxes-link link-disabled display-flex">
                 <button class="btn btn-default border display-flex-child">Expiring Soon</button>
             </a><br>
@@ -104,7 +104,7 @@ require 'ban-check.php';
             </div>
 
         </div>
-        <div class="col-sm-2 sidenav">
+        <div class="col-sm-2 sidenav sidenav-hidden">
             <div class="well">
                 <p>ADS</p>
             </div>

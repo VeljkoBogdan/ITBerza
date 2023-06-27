@@ -136,8 +136,22 @@ footer.container-fluid {
     .sidenav {
         height: auto;
         padding: 15px;
+        max-height: 175px;
+        overflow: scroll;
     }
-    .row.content {height:auto;}
+
+    .row.content {
+        height: auto;
+    }
+
+    .sidenav-hidden {
+        height: 0 !important;
+        display: none !important;
+    }
+
+    footer {
+        min-height: 500px !important;
+    }
 }
 
 .add-job-button {
