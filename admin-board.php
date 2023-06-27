@@ -71,15 +71,14 @@ if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 <div class="container-fluid col-sm-12 text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
+
         </div>
         <div class="col-sm-8 text-left middle">
             <div class="content">
                 <h3 class="text-center">Admin Board</h3><hr>
             </div>
             <div class="content">
+                <h4 class="text-center">Ban / Unban a user</h4>
                     <form class="form-horizontal" action="confirmation.php" method="POST" onsubmit="return validateAdminForm()">
                         <div class="form-group">
                             <label class="control-label col-sm-2 text-left" for="inputData">ID or Email:</label>
@@ -89,19 +88,14 @@ if(!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" id="admin-ban" name="admin-ban" class="btn btn-primary">Submit</button>
+                                <button type="submit" id="admin-ban" name="admin-ban" class="btn btn-primary">Ban / Unban</button>
                             </div>
                         </div>
                     </form>
             </div>
         </div>
         <div class="col-sm-2 sidenav">
-            <div class="well">
-                <p>ADS</p>
-            </div>
-            <div class="well">
-                <p>ADS</p>
-            </div>
+
         </div>
     </div>
 </div>

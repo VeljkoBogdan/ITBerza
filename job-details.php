@@ -67,9 +67,8 @@ require 'ban-check.php';
 <div class="container-fluid col-sm-12 text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
+            <a href="#" id="load-card-boxes-link" class="load-card-boxes-link link-disabled display-flex"><button class="btn btn-default border display-flex-child">Expiring Soon</button></a><br>
+            <div class="card-container"></div>
         </div>
         <div class="col-sm-8 text-left middle">
             <div class="text-center scaled-1-2">
@@ -121,18 +120,35 @@ require 'ban-check.php';
                         </div>
                     </div>
                     <div class="card-footer card-rounded">
+                        <div class="text-center">
                         <?php
                         if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true){
                             echo '<div class="text-center">
                                     <a href="#">Contact Company</a>
                                 </div><br>';
+
                             if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']===true){
-                                echo '<div class="text-center">
-                                        <a href="validate-job.php?id='.$id.' "><button><h4>VALIDATE AD</h4></button></a>
-                                        </div>';
+                                $sql = "SELECT is_enabled
+                                        FROM jobs
+                                        WHERE id_job = :id";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->bindParam(':id', $id);
+                                $stmt->execute();
+
+                                if ($stmt->rowCount() > 0) {
+                                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                                    $isEnabled = $row['is_enabled'];
+
+                                    // Determine the cube color based on the value of is_enabled
+                                    $cubeColor = ($isEnabled == 1) ? 'green' : 'red';
+
+                                    // Output the colored cube
+                                    echo '<a class="cube link-disabled '.$cubeColor. '" href="validate-job.php?id='.$id.'&isEnabled='.$isEnabled.'"><button><h4>ENABLE / DISABLE</h4></button></a>';
+                                }
                             }
                         }
                         ?>
+                        </div>
                     </div>
                     <br>
                 </div>
@@ -159,7 +175,8 @@ require 'ban-check.php';
 
 <!--        SCRIPTS           -->
 <script src="script.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="ajax.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

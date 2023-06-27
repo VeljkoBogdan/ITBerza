@@ -309,14 +309,29 @@ if (isset($_POST['admin-ban'])) {
         $updateQuery = "UPDATE users SET is_banned = '$newBannedStatus' WHERE id_user = '$id' OR email = '$email'";
         $confirm = $conn->query($updateQuery);
         if ($confirm) {
-            echo "is_banned column updated successfully.";
-            header("Location: admin-board.php?success=1");
+            if($newBannedStatus){
+                echo '<script> 
+                        alert("User BANNED!");
+                        window.location.href="admin-board.php?success=1";
+                        </script>';
+            }
+            else
+            {
+                echo '<script> 
+                        alert("User UNBANNED!");
+                        window.location.href="admin-board.php?success=1";
+                        </script>';
+            }
         } else {
-            echo "Error updating is_banned column: ";
-            header("Location: admin-board.php?success=0");
+            echo '<script> 
+                     alert("Error updating table!");
+                     window.location.href="admin-board.php?success=0";
+                     </script>';
         }
     } else {
-        echo "User does not exist.";
-        header("Location: admin-board.php?success=-1");
+        echo '<script> 
+                 alert("User doesn\'t exist!");
+                 window.location.href="admin-board.php?success=0";
+                 </script>';
     }
 }

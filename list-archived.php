@@ -71,12 +71,11 @@ require 'ban-check.php';
             <div class="card-container"></div>
         </div>
         <div class="col-sm-8 text-left middle"><br>
-            <div class="content card card-rounded"><br><br>
-            <h2 class="text-center"><b>Find a Job that suits You!</b></h2>
+            <h2 class="text-center"><b>Archived Jobs</b></h2>
             <h3 class="text-center">(<?php
                 $sql = "SELECT COUNT(*) AS row_count
                         FROM jobs
-                        WHERE period_to > CURDATE()";
+                        WHERE period_to < CURDATE()";
                 $result = $conn->query($sql);
 
                 if ($result->rowCount() > 0) {
@@ -87,13 +86,18 @@ require 'ban-check.php';
                     echo "No rows found.";
                 }
                 ?>
-                 results)
-            </h3><br><br><br>
-            </div>
+                results)
+            </h3>
             <div class="content">
                 <hr>
                 <h3 class="text-center"></h3>
             </div>
+            <script>
+                $(document).ready(function() {
+                    $('#toggleFormBtn').click(function() {
+                        $('#searchForm').slideToggle();
+                    });
+                });</script>
             <button class="btn btn-primary border" id="toggleFormBtn"> Filter </button>
             <form style="display: none;" id="searchForm" class="form-horizontal" method="GET" action="index.php">
                 <div class="form-group container-fluid">
@@ -210,7 +214,7 @@ require 'ban-check.php';
                 <button class="btn btn-success border" type="submit" name="search">Search</button>
             </form>
             <div class="content">
-                <?php include_once 'index-list-jobs.php'; // List the jobs ?>
+                <?php include_once 'index-list-jobs-archived.php'; // List the jobs ?>
             </div>
         </div>
         <div class="col-sm-2 sidenav">

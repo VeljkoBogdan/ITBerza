@@ -44,14 +44,11 @@ class ClassLoader
 {
     /** @var \Closure(string):void */
     private static $includeFile;
-    /**
-     * @var array<string, self>
-     */
-    private static $registeredLoaders = array();
 
-    // PSR-4
     /** @var string|null */
     private $vendorDir;
+
+    // PSR-4
     /**
      * @var array<string, array<string, int>>
      */
@@ -60,12 +57,12 @@ class ClassLoader
      * @var array<string, list<string>>
      */
     private $prefixDirsPsr4 = array();
-
-    // PSR-0
     /**
      * @var list<string>
      */
     private $fallbackDirsPsr4 = array();
+
+    // PSR-0
     /**
      * List of PSR-0 prefixes
      *
@@ -78,20 +75,30 @@ class ClassLoader
      * @var list<string>
      */
     private $fallbackDirsPsr0 = array();
+
     /** @var bool */
     private $useIncludePath = false;
+
     /**
      * @var array<string, string>
      */
     private $classMap = array();
+
     /** @var bool */
     private $classMapAuthoritative = false;
+
     /**
      * @var array<string, bool>
      */
     private $missingClasses = array();
+
     /** @var string|null */
     private $apcuPrefix;
+
+    /**
+     * @var array<string, self>
+     */
+    private static $registeredLoaders = array();
 
     /**
      * @param string|null $vendorDir
@@ -100,38 +107,6 @@ class ClassLoader
     {
         $this->vendorDir = $vendorDir;
         self::initializeIncludeClosure();
-    }
-
-    /**
-     * @return void
-     */
-    private static function initializeIncludeClosure()
-    {
-        if (self::$includeFile !== null) {
-            return;
-        }
-
-        /**
-         * Scope isolated include.
-         *
-         * Prevents access to $this/self from included files.
-         *
-         * @param  string $file
-         * @return void
-         */
-        self::$includeFile = \Closure::bind(static function($file) {
-            include $file;
-        }, null, null);
-    }
-
-    /**
-     * Returns the currently registered loaders keyed by their corresponding vendor directories.
-     *
-     * @return array<string, self>
-     */
-    public static function getRegisteredLoaders()
-    {
-        return self::$registeredLoaders;
     }
 
     /**
@@ -335,17 +310,6 @@ class ClassLoader
     }
 
     /**
-     * Can be used to check if the autoloader uses the include path to check
-     * for classes.
-     *
-     * @return bool
-     */
-    public function getUseIncludePath()
-    {
-        return $this->useIncludePath;
-    }
-
-    /**
      * Turns on searching the include path for class files.
      *
      * @param bool $useIncludePath
@@ -358,13 +322,14 @@ class ClassLoader
     }
 
     /**
-     * Should class lookup fail if not found in the current class map?
+     * Can be used to check if the autoloader uses the include path to check
+     * for classes.
      *
      * @return bool
      */
-    public function isClassMapAuthoritative()
+    public function getUseIncludePath()
     {
-        return $this->classMapAuthoritative;
+        return $this->useIncludePath;
     }
 
     /**
@@ -381,13 +346,13 @@ class ClassLoader
     }
 
     /**
-     * The APCu prefix in use, or null if APCu caching is not enabled.
+     * Should class lookup fail if not found in the current class map?
      *
-     * @return string|null
+     * @return bool
      */
-    public function getApcuPrefix()
+    public function isClassMapAuthoritative()
     {
-        return $this->apcuPrefix;
+        return $this->classMapAuthoritative;
     }
 
     /**
@@ -400,6 +365,16 @@ class ClassLoader
     public function setApcuPrefix($apcuPrefix)
     {
         $this->apcuPrefix = function_exists('apcu_fetch') && filter_var(ini_get('apc.enabled'), FILTER_VALIDATE_BOOLEAN) ? $apcuPrefix : null;
+    }
+
+    /**
+     * The APCu prefix in use, or null if APCu caching is not enabled.
+     *
+     * @return string|null
+     */
+    public function getApcuPrefix()
+    {
+        return $this->apcuPrefix;
     }
 
     /**
@@ -500,6 +475,16 @@ class ClassLoader
     }
 
     /**
+     * Returns the currently registered loaders keyed by their corresponding vendor directories.
+     *
+     * @return array<string, self>
+     */
+    public static function getRegisteredLoaders()
+    {
+        return self::$registeredLoaders;
+    }
+
+    /**
      * @param  string       $class
      * @param  string       $ext
      * @return string|false
@@ -568,5 +553,27 @@ class ClassLoader
         }
 
         return false;
+    }
+
+    /**
+     * @return void
+     */
+    private static function initializeIncludeClosure()
+    {
+        if (self::$includeFile !== null) {
+            return;
+        }
+
+        /**
+         * Scope isolated include.
+         *
+         * Prevents access to $this/self from included files.
+         *
+         * @param  string $file
+         * @return void
+         */
+        self::$includeFile = \Closure::bind(static function($file) {
+            include $file;
+        }, null, null);
     }
 }

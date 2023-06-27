@@ -1,6 +1,7 @@
 <?php
+require_once 'db-config.php';
 // Define the number of boxes per page
-$boxesPerPage = 5;
+$boxesPerPage = 10;
 
 // Get the current page number
 if (isset($_GET['page'])) {
@@ -48,11 +49,10 @@ if (!empty($employmentType)) {
 
 // Add the conditions to the SQL statement if any exist
 if (!empty($conditions)) {
-    $conditionsClause = ' WHERE j.period_to > CURDATE() AND ' . implode(' AND ', $conditions);
+    $conditionsClause = ' WHERE period_to < CURDATE() AND ' . implode(' AND ', $conditions);
 } else {
-    $conditionsClause = ' WHERE j.period_to > CURDATE() ';
+    $conditionsClause = ' WHERE period_to < CURDATE() ';
 }
-
 
 // Query to fetch the job listings with pagination
 $sql = "SELECT
@@ -94,7 +94,7 @@ JOIN qualifications q ON
 $result = $conn->query($sql);
 
 // Fetch all rows to calculate the total number of pages
-$totalResult = $conn->query("SELECT COUNT(*) AS total FROM jobs");
+$totalResult = $conn->query("SELECT COUNT(*) AS total FROM jobs WHERE period_to < CURDATE()+0");
 $totalRows = $totalResult->fetch(PDO::FETCH_ASSOC)['total'];
 $totalPages = ceil($totalRows / $boxesPerPage);
 
@@ -136,7 +136,7 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
 // Display pagination links
 if ($totalPages > 1) {
-    echo '<nav class="text-center">';
+    echo '<nav>';
     echo '<ul class="pagination justify-content-center">';
 
     // Previous page link
