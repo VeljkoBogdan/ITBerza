@@ -122,6 +122,56 @@ require 'ban-check.php';
                         <div>
                             <?php echo $row['remote']? "REMOTE": "NOT REMOTE" ; ?>
                         </div>
+                        <div>
+                            <?php
+                                if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true){
+                                    $query2 = "SELECT id_category, category FROM categories ORDER BY category";
+                                    $statement2 = $conn->query($query2);
+                                    $jobID = $_GET['id'];
+
+                                    if ($statement2) {
+                                        // Start generating the HTML code
+                                        echo '<select class="form-control col-xs-3" id="categories" name="categories" tabindex="-1">';
+
+                                        // Fetch the query results
+                                        while ($row2 = $statement2->fetch(PDO::FETCH_ASSOC)) {
+                                            $catId = $row2['id_category'];
+                                            $category = $row2['category'];
+                                            echo '<option value="' . $catId . '">' . $category . '</option>';
+                                        }
+
+                                        echo '</select>';
+                                        echo '<button class="btn btn-default border" id="change-cat">Change Category</button>';
+                                    } else {
+                                        // Handle query error
+                                        $errorInfo = $conn->errorInfo();
+                                        echo "Error: " . $errorInfo[2];
+                                    }
+                                }
+                            ?>
+                            <script>
+                                $('#change-cat').click(function() {
+                                    let jobID = <?php echo $jobID; ?>;
+                                    let categoryID = <?php echo $catId; ?>;
+
+                                    // Make an AJAX request to update the category
+                                    $.ajax({
+                                        url: 'update_category.php',
+                                        type: 'POST',
+                                        data: {
+                                            jobID: jobID,
+                                            categoryID: categoryID
+                                        },
+                                        success: function(response) {
+                                            alert('Category updated successfully');
+                                        },
+                                        error: function(xhr, status, error) {
+                                            alert('Error updating category:', error);
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
                         <div class="content card">
                             <hr>
                             <div class="card-body"><?php echo $row['text'] ; ?></div>

@@ -254,7 +254,7 @@ if (isset($_POST['change'])) {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row && password_verify($password, $row['password'])) {
-        $change = "UPDATE users SET password='$password' WHERE email = '$email'";
+        $change = "UPDATE users SET password='$newPassword' WHERE email = '$email'";
         $confirmation = $conn->query($change);
         if($confirmation){
             echo "

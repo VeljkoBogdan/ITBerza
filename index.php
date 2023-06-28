@@ -105,7 +105,7 @@ require 'ban-check.php';
                     <label class="control-label" for="categories">Category:</label>
                     <?php
                     // Query to fetch data from the "categories" table
-                    $query = "SELECT id_category, category FROM categories";
+                    $query = "SELECT id_category, category FROM categories ORDER BY category";
                     $statement = $conn->query($query);
 
                     if ($statement) {
